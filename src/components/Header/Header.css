@@ -1,0 +1,38 @@
+.header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 18px 70px;
+    background-color: #465DFF;
+    align-items: center;
+}
+
+.header__logo {
+    max-width: 38px;
+    height: 38px;
+}
+
+.header__button {
+
+}
+
+.header__button_type_registration {
+    font-family: "Inter", sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    margin: 0;
+    background-color: transparent;
+    border: none;
+    color: white;
+}
+
+.header__button_type_authorization {
+    font-family: "Inter", sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    margin: 0;
+    background-color: #2BE080;
+    width: 76px;
+    height: 32px;
+    border: none;
+}
