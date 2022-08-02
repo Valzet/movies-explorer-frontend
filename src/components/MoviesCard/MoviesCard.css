@@ -1,0 +1,103 @@
+.item {
+  background-color: white;
+  border-radius: 10px;
+  grid-template-columns: 360px 1fr;
+  max-width: 100%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+
+}
+
+.item__about {
+  margin: 14px 10px 0 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  overflow: hidden;
+
+}
+
+.item__title {
+  margin: 0;
+  font-family: Inter;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 17px;
+  letter-spacing: 0px;
+  text-align: left;
+  max-width: 80%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.item__img {
+  border-radius: 10px 10px 0px 0px;
+  width: 100%;
+  object-fit: cover;
+  overflow: hidden;
+  height: 201px;
+  cursor: pointer;
+}
+
+.item__duration {
+  margin: 0;
+  color: #A0A0A0;
+  background-color: #F9F9F9;
+  width: 52px;
+  height: 18px;
+  font-size: 11px;
+  font-weight: 400;
+  line-height: 10px;
+  letter-spacing: 0px;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 3px;
+}
+
+.item__liked {
+  position: absolute;
+  width: 21px;
+  height: 21px;
+  right: 14px;
+  top: 14px;
+  background-image: url(../../images/liked.svg);
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.item__remove-button:hover {
+  transition: opacity 0.2s ease;
+  opacity: 0.9;
+}
+
+.item__addLike {
+  position: absolute;
+  width: 72px;
+  height: 21px;
+  right: 14px;
+  top: 14px;
+  background-image: url(../../images/addLike.svg);
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  opacity: 0;
+}
+
+.item__img:hover + .item__addLike {
+  opacity: 1;
+  transition: opacity 0.2s ease;
+}
+.item__addLike:hover {
+  opacity: 1;
+}
