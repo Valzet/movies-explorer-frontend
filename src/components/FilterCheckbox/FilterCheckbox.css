@@ -1,0 +1,64 @@
+.switch__box {
+    position: relative;
+    display: inline-block;
+    width: 36px;
+    height: 20px;
+    position: relative;
+    top: 12px;
+    margin-right: 16px;
+  }
+  
+  .switch__box .checkbox {
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+  
+  /* The slider */
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #fff;
+    transition: .2s;
+    border-radius: 34px;
+  }
+  
+  .slider:before {
+    position: absolute;
+    content: "";
+    height: 16px;
+    width: 16px;
+    left: 2px;
+    bottom: 2px;
+    background-color: #ccc;
+    transition: .2s;
+    border-radius: 50%;
+  }
+  
+  .checkbox:checked + .slider:before {
+    background-color: #2BE080;
+  }
+  
+  .checkbox:focus + .slider {
+    box-shadow: 0 0 1px #242424;
+  }
+  
+  .checkbox:checked + .slider:before {
+    transform: translateX(16px);
+  }
+  
+
+  .switch__text {
+    position: relative;
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 18px;
+    letter-spacing: 0em;
+    text-align: left;
+    margin: 0;
+    top: 12px;
+} 

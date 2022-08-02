@@ -16,3 +16,7 @@
     color: black;
     margin: 0 20px;
 }
+
+.NavTav__links {
+    max-width: 1140px;
+}

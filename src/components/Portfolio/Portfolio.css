@@ -3,6 +3,11 @@
     padding: 100px 70px 120px;
 }
 
+.portfolio__content {
+    max-width: 1140px;
+    margin: 0 auto;
+}
+
 .portfolio__title {
     font-size: 18px;
     font-weight: 400;

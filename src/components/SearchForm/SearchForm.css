@@ -37,6 +37,10 @@
     height: 70px;
 }
 
+.searchForm__input:focus {
+    outline: none;
+}
+
 .searchForm__button {
     background-color: transparent;
     border: none;
@@ -57,6 +61,8 @@
     align-items: center;
     float: right;
     margin-right: 30px;
+    position: relative;
+    top: 11px;
 
 }
 
@@ -72,13 +78,4 @@
     top: 18px;
 }
 
- .switch__text {
-    position: relative;
-    font-size: 13px;
-    font-weight: 400;
-    line-height: 18px;
-    letter-spacing: 0em;
-    text-align: left;
-    margin: 0;
-    top: 12px;
-} 
+

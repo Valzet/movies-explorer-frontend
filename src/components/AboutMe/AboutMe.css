@@ -3,6 +3,11 @@
     padding: 100px 70px;
 }
 
+.aboutMe__block {
+    max-width: 1140px;
+    margin: 0 auto;
+}
+
 .aboutMe__title {
     margin: 0;
     border-bottom: #000 solid 1px;

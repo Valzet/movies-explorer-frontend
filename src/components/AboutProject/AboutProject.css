@@ -12,6 +12,8 @@
 
 .about-project {
     padding: 110px 70px;
+    max-width: 1140px;
+    margin: 0 auto;
 }
 
 .about-project__textblocks {

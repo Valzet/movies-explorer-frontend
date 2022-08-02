@@ -2,6 +2,10 @@
     background: #F5F5F5;
     padding: 100px 70px;
 }
+.technology__block {
+    max-width: 1140px;
+    margin: 0 auto;
+}
 
 .technology__title {
     margin: 0;
