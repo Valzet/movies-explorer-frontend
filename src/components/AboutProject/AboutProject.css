@@ -2,7 +2,6 @@
     margin: 0;
     border-bottom: #000 solid 1px;
     padding-bottom: 23px;
-    font-family: Inter;
     font-size: 22px;
     font-weight: 400;
     line-height: 27px;
@@ -29,7 +28,6 @@
 
 .about-project__textblock-title {
     margin: 0;
-    font-family: Inter;
     font-size: 20px;
     font-weight: 400;
     line-height: 24px;
@@ -41,7 +39,6 @@
 
 .about-project__text {
     margin: 0;
-    font-family: Inter;
     font-size: 14px;
     font-weight: 400;
     line-height: 20px;
@@ -60,7 +57,6 @@
 }
 
 .about-project__backend {
-    font-family: Inter;
     font-size: 14px;
     font-weight: 400;
     line-height: 17px;
@@ -72,7 +68,6 @@
 }
 
 .about-project__backend-span {
-    font-family: Inter;
     font-size: 14px;
     font-weight: 500;
     line-height: 17px;
@@ -86,7 +81,6 @@
 }
 
 .about-project__frontend {
-    font-family: Inter;
     font-size: 14px;
     font-weight: 400;
     line-height: 17px;
@@ -98,7 +92,6 @@
 }
 
 .about-project__frontend-span {
-    font-family: Inter;
     font-size: 14px;
     font-weight: 500;
     line-height: 17px;

@@ -11,7 +11,6 @@
 .searchForm__form {
     background-color: #F9F9F9;
     border-radius: 10px;
-    font-family: Inter;
     font-size: 18px;
     font-weight: 400;
     line-height: 20px;
@@ -75,7 +74,6 @@
 
  .switch__text {
     position: relative;
-    font-family: Inter;
     font-size: 13px;
     font-weight: 400;
     line-height: 18px;

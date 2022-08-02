@@ -7,7 +7,6 @@
     margin: 0;
     border-bottom: #000 solid 1px;
     padding-bottom: 23px;
-    font-family: Inter;
     font-size: 22px;
     font-weight: 400;
     line-height: 27px;
@@ -23,7 +22,6 @@
 .technology__textblock-title {
     margin: 0;
     padding: 90px 0 26px;
-    font-family: Inter;
     font-size: 50px;
     font-weight: 400;
     line-height: 58px;
@@ -34,7 +32,6 @@
 
 .technology__textblock-text {
     margin: 0;
-    font-family: Inter;
     font-size: 14px;
     font-weight: 400;
     line-height: 20px;
@@ -52,7 +49,6 @@
 
 .technology__list {
     margin: 0 5px;
-    font-family: Inter;
     font-size: 14px;
     font-weight: 400;
     line-height: 17px;
