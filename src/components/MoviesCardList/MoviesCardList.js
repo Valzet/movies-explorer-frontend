@@ -10,9 +10,6 @@ function MoviesCardList({initialMovies}) {
           return (<MoviesCard
             movies={movies}
             key={movies.movieId}
-          // onCardLike={props.handleCardLike}
-          // onCardClick={props.onCardClick}
-          // onCardDelete={props.handleCardDelete} 
           />)
         }
         )}

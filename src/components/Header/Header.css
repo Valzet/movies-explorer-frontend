@@ -1,6 +1,7 @@
 .header {
     background-color: #465DFF;
 }
+
 .header__main {
     background-color: #fff;
 }
@@ -13,6 +14,5 @@
     background-position: center center;
     background-repeat: no-repeat;
     float: left;
-    margin-right: 44px;
+    
 }
-
