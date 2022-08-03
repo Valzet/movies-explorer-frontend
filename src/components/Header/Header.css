@@ -1,15 +1,8 @@
 .header {
     background-color: #465DFF;
 }
-
-.header__content {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    padding: 18px 70px;
-    align-items: center;
-    max-width: 1140px;
-    margin: 0 auto;
+.header__main {
+    background-color: #fff;
 }
 
 .header__logo {
@@ -19,5 +12,7 @@
     background-size: contain;
     background-position: center center;
     background-repeat: no-repeat;
+    float: left;
+    margin-right: 44px;
 }
 

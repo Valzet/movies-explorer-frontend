@@ -1,15 +1,20 @@
 import { Link } from "react-router-dom";
 import "./Header.css";
 import Navigation from "../Navigation/Navigation"
+import React from 'react';
+import { useLocation } from "react-router-dom";
 function Header() {
+    const path = useLocation();
+
+
+
+    const headerBackground = () => path.pathname === '/' ? 'header' : 'header__main';
+
     return (
-        <header className="header">
-            <div className='header__content'>
-                <Link className="header__logo" to="/"></Link>
+        <header className={headerBackground()}>
                 <Navigation />
-                
-            </div>
         </header>
     )
+
 }
 export default Header
