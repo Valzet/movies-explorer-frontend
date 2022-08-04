@@ -10,21 +10,23 @@ function Register() {
             <div className='register__inputs'>
                 <div className='register__input-area'>
                     <p className='register__subtext'>Имя</p>
-                    <input className='register__input' placeholder='имя_пользователя' />
+                    <input className='register__input' id="name" name="name" type="name" required/>
                 </div>
                 <div className='register__input-area'>
                     <p className='register__subtext'>E-mail</p>
-                    <input className='register__input' placeholder='E-mail_пользователя' />
+                    <input className='register__input' id="email" name="email" type="email" required/>
                 </div>
                 <div className='register__input-area'>
                     <p className='register__subtext'>Пароль</p>
-                    <input className='register__input' placeholder='Пароль_пользователя' />
+                    <input className='register__input' name="password" type='password' required/>
                 </div>
             </div>
 
             <div className='register__buttons'>
                 <button type='submit' className='register__button register__buttons_type_register'>Зарегистрироваться</button>
+                <div className="register__button-login">
                 <p className="register__buttons_type_text">Уже зарегистрированы?</p> <button type='submit' className='register__button register__buttons_type_login'>Войти</button>
+                </div>
             </div>
 
         </form>
