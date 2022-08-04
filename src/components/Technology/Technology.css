@@ -115,7 +115,6 @@
 @media screen and (max-width: 601px) {
 
     .technology {
-        background: #F5F5F5;
         padding: 90px 14px 72px;
     }
 
@@ -128,5 +127,46 @@
         letter-spacing: -0.04em;
         text-align: center;
 
+    }
+}
+
+@media screen and (max-width: 601px) {
+
+    .technology {
+        background: #fff;
+        padding: 55px 18px 55px;
+    }
+
+    .technology__title {
+        font-size: 18px;
+        line-height: 22px;
+        padding-bottom: 28px;
+
+    }
+
+    .technology__textblock-title {
+        padding: 60px 0 24px;
+
+    }
+
+    .technology__textblock-text {
+        font-size: 11px;
+        font-weight: 400;
+        line-height: 16px;
+        letter-spacing: -0.04em;
+        text-align: center;
+        margin: 0 auto;
+        max-width: 292px;
+        margin-bottom: 50px;
+
+    }
+
+    .technology__used-technology {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-gap: 10px 0;
+        justify-items: center; 
+        padding: 0 50px;
+        margin: 0;
     }
 }

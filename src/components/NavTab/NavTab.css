@@ -20,3 +20,11 @@
 .NavTav__links {
     max-width: 1140px;
 }
+
+@media screen and (max-width: 601px) {
+    .NavTab__link {
+        font-size: 11px;
+        color: black;
+        margin: 0 12px;
+    }
+}

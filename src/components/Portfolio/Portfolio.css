@@ -123,4 +123,22 @@
         position: relative;
     }
 
+    .portfolio__title {
+        font-size: 14px;
+        margin: 0 0 40px;
+    }
+
+    .portfolio__links {
+
+        margin-bottom: 20px;
+    }
+
+    .portfolio__decorate {
+        font-size: 18px;
+        line-height: 28px;
+        margin: 0;
+        right: 1px;
+        top: -10px;
+    }
+
 }
