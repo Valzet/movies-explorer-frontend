@@ -6,7 +6,6 @@
 .navigation__leftSide {
     display: flex;
     align-items: center;
-    margin-right: 44px;
 }
 
 .navigation__movies {
@@ -95,4 +94,12 @@
     margin-left: 30px;
     text-decoration: none;
     color: black;
+}
+
+
+.navigation__movies-links {
+    margin-left: 44px;
+}
+.navigation__mobile {
+    display: none;
 }

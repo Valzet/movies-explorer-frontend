@@ -1,9 +1,11 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import "./Navigation.css"
-import { useLocation } from "react-router-dom";
+import useMediaQuery from "../../hooks/useMediaQuery";
+import BurgerMenu from "../BurgerMenu/BurgerMenu";
 
 function Navigation() {
     const path = useLocation();
+    const isDesktop = useMediaQuery('(min-width: 769px)');
 
     function useRouteRight() {
         switch (path.pathname) {
@@ -13,8 +15,9 @@ function Navigation() {
                     <Link className='navigation__authorization' to='signin'>Войти</Link>
                 </nav>);
             default:
-                return (<nav className='navigation__rightSide'>
-                    <Link className='profile' to='profile'>Аккаунт<div className="profile__span"><div className="profile__img"></div></div></Link>
+                return (<nav className="navigation__rightSide">
+                    {isDesktop ? <Link className='profile' to='profile'>Аккаунт<div className="profile__span"><div className="profile__img"></div></div></Link> : <BurgerMenu />}
+                    
                 </nav>)
         }
     }
@@ -23,10 +26,10 @@ function Navigation() {
             case '/':
                 return;
             default:
-                return (<>
+                return (<div className={isDesktop ? "navigation__movies-links" : "navigation__mobile"}>
                     <Link className='navigation__movies' to='movies'>Фильмы</Link>
                     <Link className='navigation__saved-movies' to='saved-movies'>Сохраненные фильмы</Link>
-                </>);;
+                </div>);
         }
     }
     return (
@@ -37,12 +40,7 @@ function Navigation() {
                 {useRouteLeft()}
             </div>
             {useRouteRight()}
-
         </div>)
-
-
-
-
 }
 
 export default Navigation;
