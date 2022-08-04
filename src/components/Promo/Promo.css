@@ -4,11 +4,12 @@
     background-size: 320px 320px;
     background-image: url("../../images/landing-logo.svg");
     background-repeat: no-repeat;
-    min-height: 524px;
+    min-height: 500px;
     background-position: center;
     display: flex;
     justify-content: center;
     align-items: center;
+    padding-bottom: 34px;
 }
 
 .promo__title {
@@ -21,3 +22,11 @@
     margin: 0;
     max-width: 730px;
 }
+
+@media screen and (max-width: 769px) {
+
+    .promo {
+        min-height: 754px;
+
+    }
+ }

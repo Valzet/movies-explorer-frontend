@@ -1,6 +1,6 @@
 .aboutMe {
     background: #fff;
-    padding: 100px 70px;
+    padding: 100px 70px 0;
 }
 
 .aboutMe__block {
@@ -70,3 +70,60 @@
     text-decoration: none;
     margin: 0;
 }
+
+@media screen and (max-width: 769px) {
+    .aboutMe {
+        padding: 90px 50px 0;
+    }
+
+    .aboutMe__photo {
+        max-width: 257px;
+        max-height: 307px;
+    }
+
+    .aboutMe__name {
+        font-size: 40px;
+        font-weight: 400;
+        line-height: 40px;
+        letter-spacing: -0.04em;
+        text-align: left;
+        margin: 0;
+
+    }
+
+    .aboutMe__profession {
+        font-size: 12px;
+        font-weight: 500;
+        line-height: 18px;
+        text-align: left;
+        margin: 0;
+        padding-top: 16px;
+    }
+
+    .aboutMe__description {
+        font-size: 12px;
+        font-weight: 400;
+        line-height: 18px;
+        text-align: left;
+        margin: 0;
+        padding-top: 20px;
+        max-width: 370px;
+    }
+
+    .aboutMe__contacts {
+        padding-top: 87px;
+    }
+}
+
+@media screen and (max-width: 601px) {
+    .aboutMe__photo {
+        max-width: 292px;
+        max-height: 352px;
+    }
+
+    .aboutMe__content {
+        display: flex;
+        flex-direction: column-reverse;
+    }
+
+ }

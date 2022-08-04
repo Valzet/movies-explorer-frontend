@@ -103,3 +103,10 @@
 .navigation__mobile {
     display: none;
 }
+
+@media screen and (max-width: 769px) {
+
+    .navigation {
+        padding: 18px 30px;
+    }
+ }
