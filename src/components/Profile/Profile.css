@@ -17,7 +17,7 @@
 }
 
 .profile__inputs {
-    padding: 120px 0 220px;
+    padding: 124px 0 220px;
 }
 
 .profile__input-area {
@@ -68,7 +68,6 @@
     line-height: 16px;
     text-align: center;
     cursor: pointer;
-
 }
 
 .form__buttons_type_edit {
@@ -80,3 +79,43 @@
     font-weight: 500;
     color: #EE3465;
 }
+
+@media screen and (max-width: 769px) {
+    .profile__form {
+        padding-top: 30%;
+
+    }
+
+    .profile__inputs {
+        padding: 97px 0 208px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+
+    .profile__inputs {
+        margin: 0 30px;
+    }
+    
+    .profile__form {
+        padding-top: 66px;
+        max-width: 320px;
+        margin: 0 auto;
+    }
+    .profile__inputs {
+        padding: 81px 0 117%;
+    }
+    .profile__input-area {
+
+        padding-bottom: 16px;
+        margin-bottom: 17px;
+        max-width: 260px;
+    }
+
+    .form__button {
+
+        font-size: 12px;
+        line-height: 14px;
+
+    }
+ }

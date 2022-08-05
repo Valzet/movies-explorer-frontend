@@ -6,7 +6,7 @@ function Profile() {
         <>
             <Header />
             <form className='profile__form'>
-                <h2 className='profile__title'>Привет, 'имя_пользователя'! </h2>
+                <h2 className='profile__title'>Привет, 'Имя'! </h2>
                 <div className='profile__inputs'>
                     <div className='profile__input-area'>
                         <p className='profile__subtext'>Имя</p>

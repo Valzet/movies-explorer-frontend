@@ -101,3 +101,43 @@
     display: flex;
     flex-direction: row;
 }
+
+@media screen and (max-width: 580px) {
+    .register {
+        align-items: center;
+        width: 260px;
+    }
+
+    .register__title {
+        padding-top: 49px;
+        padding-bottom: 82px;
+    }
+
+    .register__inputs {
+        width: 260px;
+    }
+
+    .register__input-area {
+        padding-bottom: 6px;
+        width: 260px;
+    }
+
+    .register__buttons {
+        margin-top: 160px;
+        width: 260px;
+    }
+
+    .register__buttons_type_register {
+        font-weight: 500;
+        margin-bottom: 12px;
+        width: 100%;
+        color: white;
+        height: 45px;
+    }
+
+    .register__button {
+        font-size: 12px;
+        line-height: 14px;
+    }
+
+}

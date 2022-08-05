@@ -9,7 +9,7 @@ function SearchForm() {
         <section className="searchForm">
             <form className="searchForm__form">
                 <img className="searchForm__decoration" src={searchIcon} alt='Иконка поиска' />
-                <input className="searchForm__input" placeholder='фильм' required />
+                <input className="searchForm__input" placeholder='Фильм' required />
 
 
                 <label className="switch">

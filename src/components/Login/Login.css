@@ -100,3 +100,50 @@
     display: flex;
     flex-direction: row;
 }
+
+@media screen and (max-width: 580px) {
+    .login {
+        align-items: center;
+        width: 260px;
+    }
+
+    .login__title {
+        padding-top: 49px;
+        padding-bottom: 82px;
+    }
+
+    .login__inputs {
+        width: 260px;
+    }
+
+    .login__input-area {
+        padding-bottom: 6px;
+        width: 260px;
+    }
+
+    .login__buttons {
+        margin-top: 160px;
+        width: 260px;
+    }
+
+    .login__buttons_type_text {
+
+
+        font-size: 12px;
+        font-weight: 400;
+        line-height: 15px;
+
+
+
+
+        width: 100%;
+        color: #A0A0A0;
+
+    }
+
+    .login__button {
+        font-size: 12px;
+        line-height: 14px;
+    }
+
+}
