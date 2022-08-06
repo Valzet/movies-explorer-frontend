@@ -21,7 +21,7 @@ function Login() {
             <div className='login__buttons'>
                 <button type='submit' className='login__button login__buttons_type_login'>Войти</button>
                 <div className="login__button-login">
-                    <p className="login__buttons_type_text">Ещё не зарегистрированы?</p> <button type='submit' className='login__button login__buttons_type_register'>Регистрация</button>
+                    <p className="login__buttons_type_text">Ещё не зарегистрированы?</p> <Link className='login__button login__buttons_type_register' to='signup'>Регистрация</Link>
                 </div>
             </div>
 

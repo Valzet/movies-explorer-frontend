@@ -14,10 +14,7 @@ function SearchForm() {
 
                 <label className="switch">
                     <FilterCheckbox />
-                    {/* <button className="switch__toogle">
-                        <img className="searchForm__decoration_type_switch" src={switchImg} alt='переключатель' />
-                    </button> */}
-                    
+
                 </label>
                 <button className="searchForm__button"><img className="searchButton__img" src={searchButton} alt='кнопка поиска' /></button>
 

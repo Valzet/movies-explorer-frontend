@@ -17,7 +17,6 @@ function Navigation() {
             default:
                 return (<nav className="navigation__rightSide">
                     {isDesktop ? <Link className='profile' to='profile'>Аккаунт<div className="profile__span"><div className="profile__img"></div></div></Link> : <BurgerMenu />}
-                    
                 </nav>)
         }
     }

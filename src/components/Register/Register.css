@@ -84,6 +84,8 @@
 .register__buttons_type_login {
     font-weight: 400;
     color: #EE3465;
+    text-decoration: none;
+    margin-left: 7px;
 }
 
 .register__buttons_type_text {
@@ -133,6 +135,7 @@
         width: 100%;
         color: white;
         height: 45px;
+       
     }
 
     .register__button {
