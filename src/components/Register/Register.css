@@ -1,0 +1,146 @@
+.register {
+    padding-top: 74px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 400px;
+    margin: 0 auto;
+}
+
+.register__title {
+    padding-top: 40px;
+    padding-bottom: 40px;
+    font-size: 24px;
+    font-weight: 500;
+    line-height: 29px;
+    text-align: left;
+    margin: 0;
+}
+
+.register__inputs {
+    height: 264px;
+}
+
+.register__input-area {
+    border-bottom: 1px solid #E8E8E8;
+    padding-bottom: 10px;
+    margin-bottom: 24px;
+    width: 410px;
+
+}
+
+.register__input-area:last-of-type {
+    margin-bottom: 0;
+}
+
+.register__subtext {
+    font-size: 10px;
+    font-weight: 400;
+    line-height: 12px;
+    text-align: left;
+    margin: 0;
+    color: #A0A0A0;
+}
+
+.register__input {
+    border: none;
+    outline: none;
+    margin: 5px 0 0;
+    width: 100%;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 17px;
+    text-align: left;
+    color: black;
+}
+
+.register__buttons {
+    margin-top: 69px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.register__button {
+    border: none;
+    background-color: transparent;
+    font-size: 14px;
+    line-height: 16px;
+    text-align: center;
+    cursor: pointer;
+
+}
+
+.register__buttons_type_register {
+    font-weight: 500;
+    margin-bottom: 16px;
+    background-color: #FF6838;
+    width: 100%;
+    color: white;
+    height: 45px;
+}
+
+.register__buttons_type_login {
+    font-weight: 400;
+    color: #EE3465;
+    text-decoration: none;
+    margin-left: 7px;
+}
+
+.register__buttons_type_text {
+    margin: 0;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 17px;
+    text-align: center;
+    color: #A0A0A0;
+
+
+}
+
+.register__button-login {
+    display: flex;
+    flex-direction: row;
+}
+
+@media screen and (max-width: 580px) {
+    .register {
+        align-items: center;
+        width: 260px;
+    }
+
+    .register__title {
+        padding-top: 49px;
+        padding-bottom: 82px;
+    }
+
+    .register__inputs {
+        width: 260px;
+    }
+
+    .register__input-area {
+        padding-bottom: 6px;
+        width: 260px;
+    }
+
+    .register__buttons {
+        margin-top: 160px;
+        width: 260px;
+    }
+
+    .register__buttons_type_register {
+        font-weight: 500;
+        margin-bottom: 12px;
+        width: 100%;
+        color: white;
+        height: 45px;
+       
+    }
+
+    .register__button {
+        font-size: 12px;
+        line-height: 14px;
+    }
+
+}

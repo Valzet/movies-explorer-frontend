@@ -1,0 +1,113 @@
+.BurgerButton {
+    width: 44px;
+    height: 44px;
+    background-image: url("../../images/burgerIcon.svg");
+    background-size: contain;
+    background-position: center center;
+    background-repeat: no-repeat;
+    float: left;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.burger {
+    display: none;
+    background-color: rgb(0, 0, 0, 0.5);
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    flex-direction: column;
+    width: 100vw;
+    height: 100vh;
+    z-index: 2;
+}
+
+.burger_opened {
+    display: flex;
+}
+
+.burger__container {
+    background-color: #fff;
+    width: 68vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    right: 0;
+
+}
+
+.burger__buttonClose {
+    border: 0;
+    cursor: pointer;
+    background-color: transparent;
+    position: fixed;
+    top: 29px;
+    right: 29px;
+    background-image: url(../../images/CloseIcon.svg);
+    background-size: contain;
+    background-position: center center;
+    background-repeat: no-repeat;
+    padding: 0;
+    width: 28px;
+    height: 28px;
+}
+
+.burger__navigation {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100vh;
+    /* padding: 159px 0 92px; */
+}
+
+.burger__links {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 164px;
+}
+
+.burger__link {
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 22px;
+    text-align: center;
+    color: black;
+    text-decoration: none;
+    margin-bottom: 28px;
+    padding-bottom: 1px;
+
+}
+
+.burger__link-underline {
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 22px;
+    text-align: center;
+    color: black;
+    text-decoration: none;
+    margin-bottom: 28px;
+    padding-bottom: 1px;
+    border-bottom: solid black 2px;
+}
+
+.burger__profile {
+    margin-bottom: 92px;
+
+}
+
+@media screen and (max-width: 580px) {
+    .BurgerButton {
+        width: 34px;
+        height: 47px;
+    }
+
+    .burger__container {
+        width: 100vw;
+    
+    }
+ }
+
