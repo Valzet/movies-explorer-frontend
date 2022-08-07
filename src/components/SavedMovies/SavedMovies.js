@@ -1,5 +1,4 @@
 import "./SavedMovies.css"
-
 import MoviesCardList from "../MoviesCardList/MoviesCardList"
 import SearchForm from "../SearchForm/SearchForm"
 import { initialMovies } from '../../utils/constans.js'

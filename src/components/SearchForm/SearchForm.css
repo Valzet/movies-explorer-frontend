@@ -13,7 +13,6 @@
     font-weight: 400;
     line-height: 20px;
     text-align: left;
-    /* display: flex; */
     max-width: 1140px;
     width: 100%;
     margin: 0 auto;
@@ -26,7 +25,6 @@
     padding-left: 19px;
     padding-right: 10px;
 }
-
 
 .searchForm__input {
     background-color: transparent;
@@ -51,8 +49,6 @@
     padding-right: 19px;
     border-right: 1px solid #CBCBCB;
 }
-
-.searchButton__img {}
 
 .searchButton__img:hover {
     transform: scale(0.95);
@@ -117,9 +113,7 @@
     }
 
     .searchForm {
-
         padding: 70px 10px 113px;
-
 
     }
 

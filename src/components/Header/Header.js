@@ -4,9 +4,6 @@ import React from 'react';
 import { useLocation } from "react-router-dom";
 function Header() {
     const path = useLocation();
-
-
-
     const headerBackground = () => path.pathname === '/' ? 'header' : 'header__main';
 
     return (

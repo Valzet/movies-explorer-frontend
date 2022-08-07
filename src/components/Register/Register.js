@@ -6,7 +6,6 @@ function Register() {
         <form className="register">
             <Link className="header__logo" to="/"></Link>
             <h2 className="register__title">Добро пожаловать!</h2>
-
             <div className='register__inputs'>
                 <div className='register__input-area'>
                     <p className='register__subtext'>Имя</p>
@@ -21,7 +20,6 @@ function Register() {
                     <input className='register__input' name="password" type='password' required />
                 </div>
             </div>
-
             <div className='register__buttons'>
                 <button type='submit' className='register__button register__buttons_type_register'>Зарегистрироваться</button>
                 <div className="register__button-login">

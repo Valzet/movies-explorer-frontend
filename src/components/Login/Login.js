@@ -6,7 +6,6 @@ function Login() {
         <form className="login">
             <Link className="header__logo" to="/"></Link>
             <h2 className="login__title">Рады видеть!</h2>
-
             <div className='login__inputs'>
                 <div className='login__input-area'>
                     <p className='login__subtext'>E-mail</p>
@@ -17,7 +16,6 @@ function Login() {
                     <input className='login__input' name="password" type='password' required />
                 </div>
             </div>
-
             <div className='login__buttons'>
                 <button type='submit' className='login__button login__buttons_type_login'>Войти</button>
                 <div className="login__button-login">

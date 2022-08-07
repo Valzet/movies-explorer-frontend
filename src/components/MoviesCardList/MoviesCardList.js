@@ -2,7 +2,7 @@ import "./MoviesCardList.css"
 
 import MoviesCard from '../MoviesCard/MoviesCard'
 
-function MoviesCardList({initialMovies}) {
+function MoviesCardList({ initialMovies }) {
   return (
     <section className="elements">
       <ul className="elements__list">
