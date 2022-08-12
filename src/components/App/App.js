@@ -11,6 +11,7 @@ import { MovieApi } from "../../utils/MoviesApi";
 import { useState, useEffect } from "react";
 import * as mainApi from '../../utils/MainApi'
 import CurrentUserContext from '../../contexts/CurrentUserContext'
+import Header from '../Header/Header';
 function App() {
   const [movies, setMovies] = useState([]);
   // const [checkBoxActive, setCheckBoxActive] = useState(true)
@@ -20,21 +21,22 @@ function App() {
 
   useEffect(() => {
     if (loggedIn) {
-   mainApi.getUser()
-      .then(res =>
-        setCurrentUser(res.data)
-      )
-      .catch(err => {
-        console.log(err);
-      })
-    mainApi.getSavedMovies()
-      .then((card) => {
-        // setCards(card)
-      })
-      .catch(err => {
-        console.log(err);
-      });
-  }}, [loggedIn])
+      mainApi.getUser()
+        .then(res =>
+          setCurrentUser(res.data)
+        )
+        .catch(err => {
+          console.log(err);
+        })
+      mainApi.getSavedMovies()
+        .then((card) => {
+          // setCards(card)
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    }
+  }, [loggedIn])
 
   useEffect(() => {
     tokenCheck();
@@ -48,10 +50,10 @@ function App() {
     history.push('/signin');
   }, [loggedIn, history]);
 
-  function handleUpdateUser( name, email ) {
-    mainApi.updateUser( name, email )
+  function handleUpdateUser(name, email) {
+    mainApi.updateUser(name, email)
       .then(res => {
-        setCurrentUser({...currentUser, name, email });
+        setCurrentUser({ ...currentUser, name, email });
       })
       .catch(err => {
         console.log(err);
@@ -74,8 +76,8 @@ function App() {
     }
   }
 
-  const handleLogin = ( email, password ) => {
-    mainApi.authorize( email, password )
+  const handleLogin = (email, password) => {
+    mainApi.authorize(email, password)
       .then((res) => {
         localStorage.setItem('token', res.token);
         tokenCheck();
@@ -87,15 +89,15 @@ function App() {
       })
   }
 
-  const handleRegister = ( name, email, password  ) => {
-    mainApi.register( name, email, password )
-       .then(() => {
-         history.push('/signin');
-       })
-       .catch(err => {
-         console.log(err);
-       })
-   }
+  const handleRegister = (name, email, password) => {
+    mainApi.register(name, email, password)
+      .then(() => {
+        history.push('/signin');
+      })
+      .catch(err => {
+        console.log(err);
+      })
+  }
 
   function getMovies() {
     MovieApi.getMovies()
@@ -126,24 +128,32 @@ function App() {
     localStorage.removeItem('token')
     setLoggedIn(false);
   }
-
   return (
     <div className="content">
-<CurrentUserContext.Provider value={currentUser}>
-      <Switch>
-        <Route exact path='/signup'> <Register handleRegister={handleRegister} />  </Route>
-        <Route exact path='/signin'> <Login handleLogin={handleLogin} tokenCheck={tokenCheck}/> </Route>
-        <Route exact path='/'> <Main /> </Route>
-        <Route exact path='/movies'> <Movies
-          searchMoviesHandler={searchMoviesHandler}
-          filteredMovies={filteredMovies}
-        /> </Route>
-        <Route exact path='/saved-movies'> <SavedMovies
-          searchMoviesHandler={searchMoviesHandler}
-        />  </Route>
-        <Route exact path='/profile'> <Profile onUpdateUser={handleUpdateUser} handleLogout={handleLogout} /> </Route>
-        <Route path='/*'> <NotFound /> </Route>
-      </Switch>
+      <CurrentUserContext.Provider value={currentUser}>
+        <Switch>
+          <Route exact path='/signup'> <Register handleRegister={handleRegister} />  </Route>
+          <Route exact path='/signin'> <Login handleLogin={handleLogin} tokenCheck={tokenCheck} /> </Route>
+          <Route exact path='/'>
+            <Header loggedIn={loggedIn} />
+            <Main />
+          </Route>
+          <Route exact path='/movies'>
+            <Header loggedIn={loggedIn} />
+            <Movies
+              searchMoviesHandler={searchMoviesHandler}
+              filteredMovies={filteredMovies}
+            /> </Route>
+          <Route exact path='/saved-movies'>
+            <Header loggedIn={loggedIn} />
+            <SavedMovies
+              searchMoviesHandler={searchMoviesHandler}
+            />  </Route>
+          <Route exact path='/profile'>
+            <Header loggedIn={loggedIn} />
+            <Profile onUpdateUser={handleUpdateUser} handleLogout={handleLogout} /> </Route>
+          <Route path='/*'> <NotFound /> </Route>
+        </Switch>
       </CurrentUserContext.Provider>
     </div >
   );

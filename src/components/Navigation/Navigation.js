@@ -3,33 +3,37 @@ import "./Navigation.css"
 import useMediaQuery from "../../hooks/useMediaQuery";
 import BurgerMenu from "../BurgerMenu/BurgerMenu";
 
-function Navigation() {
+function Navigation({loggedIn}) {
     const path = useLocation();
     const isDesktop = useMediaQuery('(min-width: 769px)');
 
-    function useRouteRight() {
+    function changeLocationTextColor(){
         switch (path.pathname) {
             case '/':
-                return (<nav className='navigation__rightSide'>
-                    <Link className='navigation__registration' to='signup'>Регистрация</Link>
-                    <Link className='navigation__authorization' to='signin'>Войти</Link>
-                </nav>);
+                return ('profile__span_type_main');
             default:
-                return (<nav className="navigation__rightSide">
-                    {isDesktop ? <Link className='profile' to='profile'>Аккаунт<div className="profile__span"><div className="profile__img"></div></div></Link> : <BurgerMenu />}
-                </nav>)
+                return ('profile__span');
         }
     }
+
+    function useRouteRight() {
+        if(!loggedIn) {
+            return (<nav className='navigation__rightSide'>
+            <Link className='navigation__registration' to='signup'>Регистрация</Link>
+            <Link className='navigation__authorization' to='signin'>Войти</Link>
+        </nav>) 
+        } else {return (<nav className="navigation__rightSide">
+        {isDesktop ? <Link className='profile' to='profile'>Аккаунт<div className={changeLocationTextColor()}><div className="profile__img"></div></div></Link> : <BurgerMenu />}
+    </nav>) }
+    }
+
     function useRouteLeft() {
-        switch (path.pathname) {
-            case '/':
-                return;
-            default:
-                return (<div className={isDesktop ? "navigation__movies-links" : "navigation__mobile"}>
-                    <Link className='navigation__movies' to='movies'>Фильмы</Link>
-                    <Link className='navigation__saved-movies' to='saved-movies'>Сохраненные фильмы</Link>
-                </div>);
-        }
+        if(!loggedIn) {
+            return;
+        } else {return (<div className={isDesktop ? "navigation__movies-links" : "navigation__mobile"}>
+        <Link className='navigation__movies' to='movies'>Фильмы</Link>
+        <Link className='navigation__saved-movies' to='saved-movies'>Сохраненные фильмы</Link>
+    </div>);}
     }
     return (
         <div className='navigation'>
