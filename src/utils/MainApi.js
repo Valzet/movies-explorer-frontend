@@ -1,78 +1,99 @@
-class MainApi {
-    constructor({ baseUrl}) {
-      this._baseUrl = baseUrl;
-    }
-  
-    get _headers() {
-      return {
-        'Content-Type': 'application/json',
-        authorization: `Bearer ${localStorage.getItem('token')}`,
-      }
-    }
-  
-    _checkResponse(res) {
-      if (res.ok) {
-        return res.json();
-      }
-      return Promise.reject(`Ошибка ${res.status}`);
-    }
-  
-    getProfile() {
-      return fetch(`${this._baseUrl}/users/me`,
-        {
-          headers: this._headers,
-        })
-        .then(this._checkResponse)
-    }
-  
-    getInitialCards() {
-      return fetch(`${this._baseUrl}/cards`,
-        {
-          headers: this._headers,
-        })
-        .then(this._checkResponse)
-    }
-  
-    editProfile(data) {
-      return fetch(`${this._baseUrl}/users/me `,
-        {
-          method: "PATCH",
-          headers: this._headers,
-          body: JSON.stringify({
-            name: data.name,
-            about: data.about
-          })
-        })
-        .then(this._checkResponse)
-    }
-  
-  
-    changeLikeCardStatus(id, isLiked) {
-      return fetch(`${this._baseUrl}/cards/${id}/likes`,
-        {
-          method: isLiked ? "PUT" : "DELETE",
-          headers: this._headers,
-        })
-        .then(this._checkResponse)
-    }
-    addAvatar(data) {
-      return fetch(`${this._baseUrl}/users/me/avatar`,
-        {
-          method: "PATCH",
-          headers: this._headers,
-          body: JSON.stringify({
-            avatar: data.avatar
-          })
-        })
-        .then(this._checkResponse)
-    }
+// export const BASE_URL = 'https://api.diploma39.nomoredomains.xyz'
+export const BASE_URL = 'http://localhost:3001';
+
+const _checkResponse = (res) => {
+  if (res.ok) {
+    return res.json();
   }
-  
-  export const api = new MainApi({
-    // baseUrl: 'https://api.diploma39.nomoredomains.xyz',
-    baseUrl: `http://localhost:3001`,
+  return Promise.reject(`Ошибка ${res.status}`);
+}
+const _getToken = () => {
+  return `Bearer ${localStorage.getItem('token')}`;
+}
+
+export const getSavedMovies = () => {
+  return fetch(`${BASE_URL}/movies`,
+    {
+      headers: {
+        'Authorization': _getToken(),
+      }
+    })
+    .then(_checkResponse)
+}
+
+export const saveMovie = (movie) => {
+  return fetch(`${BASE_URL}/movies`, {
+    method: 'POST',
     headers: {
-      'authorization': `Bearer ${localStorage.getItem('token')}`,
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
+      'Authorization': _getToken(),
+    },
+    body: JSON.stringify({
+      country: movie.country,
+      director: movie.director,
+      duration: movie.duration,
+      year: movie.year,
+      description: movie.description,
+      image: `https://api.nomoreparties.co/${movie.image.url}`,
+      trailerLink: movie.trailerLink,
+      thumbnail: `https://api.nomoreparties.co/${movie.image.formats.thumbnail.url}`,
+      movieId: movie.id,
+      nameRU: movie.nameRU,
+      nameEN: movie.nameEN,
+    })
+  })
+    .then(_checkResponse)
+}
+
+export const deleteMovie = (id) => {
+  return fetch(`${BASE_URL}/movies/${id}`, {
+    method: 'DELETE',
+    headers: {
+      'Authorization': _getToken(),
     }
-  });
+  })
+    .then(_checkResponse)
+}
+
+export const createUser = (name, email, password) => {
+  return fetch(`${BASE_URL}/signup`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ name, email, password })
+  })
+    .then(_checkResponse)
+}
+
+export const authorize = (email, password) => {
+  return fetch(`${BASE_URL}/signin`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ email, password })
+  })
+    .then(_checkResponse)
+}
+
+export const getUser = () => {
+  return fetch(`${BASE_URL}/users/me`, {
+    headers: {
+      'Authorization': _getToken(),
+    }
+  })
+    .then(_checkResponse)
+}
+
+export const updateUser = (name, email) => {
+  return fetch(`${BASE_URL}/users/me`, {
+    method: 'PATCH',
+    headers: {
+      'Authorization': _getToken(),
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ name, email })
+  })
+    .then(_checkResponse)
+}

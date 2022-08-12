@@ -3,9 +3,9 @@ import { useState, useEffect } from "react";
 import MoviesCard from '../MoviesCard/MoviesCard'
 import useMediaQuery from "../../hooks/useMediaQuery";
 
-function MoviesCardList({ movies }) {
-  const [cardsCount, setCardsCount] = useState({ moviesAmount: 12, additionalsMovies: 3 });
-  const [movieList, setMovieList] = useState([]);
+function MoviesCardList({ filteredMovies }) {
+  const [cardsCount, setCardsCount] = useState(12); //отображаемые карточки
+  const [movieList, setMovieList] = useState([]); //список загруженных фильмов
 
   const isDesktop = useMediaQuery('(min-width: 769px)');
   const isTablet = useMediaQuery('(max-width: 768px)');
@@ -13,27 +13,33 @@ function MoviesCardList({ movies }) {
 
   function mediaQueryHooks() {
     if (isDesktop && !isMobile && !isTablet) {
-      setCardsCount({ moviesAmount: 12, additionalsMovies: 3 })
+      setCardsCount(12)
     } else if (isTablet && !isMobile) {
-      setCardsCount({ moviesAmount: 8, additionalsMovies: 2 })
+      setCardsCount(8)
     } else if (isMobile) {
-      setCardsCount({ moviesAmount: 5, additionalsMovies: 2 })
+      setCardsCount(5)
     }
   }
 
-  useEffect(() => {
+  useEffect(() => { //хук ресайза 
     const timer = setTimeout(() => {
       window.addEventListener('resize', mediaQueryHooks);
     }, 100);
     return () => clearTimeout(timer);
   })
 
-  useEffect(() => {
-    setMovieList(movies.slice(0, cardsCount.moviesAmount));
-  }, [cardsCount.moviesAmount, movies])
+  useEffect(() => { //хук количества отображаемых карточек
+    setMovieList(filteredMovies.slice(0, cardsCount));
+  }, [cardsCount, filteredMovies])
 
-
-  function handleAddMoreCards() {
+  function handleAddMoreCards() { //дополнительные карточки
+    if (isDesktop && !isMobile && !isTablet) {
+      setCardsCount(cardsCount + 3)
+    } else if (isTablet && !isMobile) {
+      setCardsCount(cardsCount + 2)
+    } else if (isMobile) {
+      setCardsCount(cardsCount + 2)
+    }
   }
 
   return (
@@ -47,7 +53,10 @@ function MoviesCardList({ movies }) {
         }
         )}
       </ul>
-      <button className="movie__aditionalCards" onClick={handleAddMoreCards}>Еще</button>
+      {filteredMovies.length !== movieList.length ?
+        <button className="movie__aditionalCards"
+          onClick={handleAddMoreCards}
+        >Еще</button> : ''}
     </section>
 
   )
