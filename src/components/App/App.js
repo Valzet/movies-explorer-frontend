@@ -12,10 +12,14 @@ import { useState, useEffect } from "react";
 import * as mainApi from '../../utils/MainApi'
 import CurrentUserContext from '../../contexts/CurrentUserContext'
 import Header from '../Header/Header';
+import SearchForm from "../SearchForm/SearchForm"
 function App() {
-  const [movies, setMovies] = useState([]);
-  // const [checkBoxActive, setCheckBoxActive] = useState(true)
+  const [allMovies, setAllMovies] = useState([]);
+  const [userFoundMovies, setUserFoundMovies] = useState([]);
+  const [userSavedMovies, setUserSavedMovies] = useState([]);
+  const [checkBoxActive, setCheckboxActive] = useState(true)
   const [loggedIn, setLoggedIn] = useState(false);
+  const [searchInput, setSearchInput] = useState('');
   const [currentUser, setCurrentUser] = useState('')
   const history = useHistory();
 
@@ -42,13 +46,13 @@ function App() {
     tokenCheck();
   }, [])
 
-  useEffect(() => {
-    if (loggedIn) {
-      history.push("/movies");
-      return;
-    }
-    history.push('/signin');
-  }, [loggedIn, history]);
+  // useEffect(() => {
+  //   if (loggedIn) {
+  //     history.push("/movies");
+  //     return;
+  //   }
+
+  // }, [loggedIn, history]);
 
   function handleUpdateUser(name, email) {
     mainApi.updateUser(name, email)
@@ -59,7 +63,6 @@ function App() {
         console.log(err);
       });
   }
-
 
   const tokenCheck = () => {
     if (localStorage.getItem('token')) {
@@ -82,7 +85,7 @@ function App() {
         localStorage.setItem('token', res.token);
         tokenCheck();
         setLoggedIn(true);
-        history.push('/');
+        history.push("/movies");
       })
       .catch(err => {
         console.log(err);
@@ -99,34 +102,48 @@ function App() {
       })
   }
 
-  function getMovies() {
+  useEffect(() => {
     MovieApi.getMovies()
       .then((data) => {
-        setMovies(data);
+        setAllMovies(data);
         localStorage.setItem('movies', JSON.stringify(data));
       })
       .catch((err) => {
         console.log(err);
       })
+  }, [])
+
+  const handleCheckbox = () => {
+    if (checkBoxActive) {
+      setCheckboxActive(false)
+    } else {
+      setCheckboxActive(true)
+    }
   }
 
   useEffect(() => {
-    getMovies();
-  }, [])
+    let filteredMovies
+    if (!checkBoxActive) {
+      filteredMovies = allMovies.filter(movie => movie.duration <= 40)
+    } else if (checkBoxActive) { filteredMovies = allMovies }
+    setUserFoundMovies(filteredMovies)
+  }, [checkBoxActive, allMovies])
 
-  const [searchInput, setSearchInput] = useState("");
   const searchMoviesHandler = (event) => {
     const search = event.target.value.toLowerCase();
     setSearchInput(search);
   };
 
-  const filteredMovies = movies.filter((movie) => {
-    return movie.nameRU.toLowerCase().includes(searchInput);
+  const searchedMovies = userFoundMovies.filter((movie) => {
+    if (searchInput !== "") {
+      return movie.nameRU.toLowerCase().includes(searchInput);
+    } else return '';
   });
 
   function handleLogout() {
     localStorage.removeItem('token')
     setLoggedIn(false);
+    history.push("/");
   }
   return (
     <div className="content">
@@ -140,14 +157,14 @@ function App() {
           </Route>
           <Route exact path='/movies'>
             <Header loggedIn={loggedIn} />
+            <SearchForm searchMoviesHandler={searchMoviesHandler} handleCheckbox={handleCheckbox} />
             <Movies
-              searchMoviesHandler={searchMoviesHandler}
-              filteredMovies={filteredMovies}
+              searchedMovies={searchedMovies}
             /> </Route>
           <Route exact path='/saved-movies'>
             <Header loggedIn={loggedIn} />
+            <SearchForm searchMoviesHandler={searchMoviesHandler} />
             <SavedMovies
-              searchMoviesHandler={searchMoviesHandler}
             />  </Route>
           <Route exact path='/profile'>
             <Header loggedIn={loggedIn} />
@@ -159,4 +176,4 @@ function App() {
   );
 }
 
-export default App;
+export default App; 

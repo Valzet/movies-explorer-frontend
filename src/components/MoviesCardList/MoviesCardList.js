@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import MoviesCard from '../MoviesCard/MoviesCard'
 import useMediaQuery from "../../hooks/useMediaQuery";
 
-function MoviesCardList({ filteredMovies }) {
+function MoviesCardList({ searchedMovies }) {
   const [cardsCount, setCardsCount] = useState(12); //отображаемые карточки
   const [movieList, setMovieList] = useState([]); //список загруженных фильмов
 
@@ -29,8 +29,8 @@ function MoviesCardList({ filteredMovies }) {
   })
 
   useEffect(() => { //хук количества отображаемых карточек
-    setMovieList(filteredMovies.slice(0, cardsCount));
-  }, [cardsCount, filteredMovies])
+    setMovieList(searchedMovies.slice(0, cardsCount));
+  }, [cardsCount, searchedMovies])
 
   function handleAddMoreCards() { //дополнительные карточки
     if (isDesktop && !isMobile && !isTablet) {
@@ -53,7 +53,7 @@ function MoviesCardList({ filteredMovies }) {
         }
         )}
       </ul>
-      {filteredMovies.length !== movieList.length ?
+      {searchedMovies.length !== movieList.length ?
         <button className="movie__aditionalCards"
           onClick={handleAddMoreCards}
         >Еще</button> : ''}

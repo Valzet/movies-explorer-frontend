@@ -1,10 +1,11 @@
 import "./FilterCheckbox.css"
 
-function FilterCheckbox() {
+function FilterCheckbox({handleCheckbox}) {
+    
     return (
         <>
         <div className="switch__box">
-            <input className="checkbox" type="checkbox" defaultChecked={true} />
+            <input className="checkbox" type="checkbox" onClick={handleCheckbox} />
                 <span className="slider round"></span>
         </div>
         <p className="switch__text">Короткометражки</p>
