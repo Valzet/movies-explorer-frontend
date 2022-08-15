@@ -33,8 +33,9 @@ function App() {
           console.log(err);
         })
       mainApi.getSavedMovies()
-        .then((card) => {
-          // setCards(card)
+        .then((data) => {
+          setUserSavedMovies(data)
+          localStorage.setItem('saved-movies', JSON.stringify(data));
         })
         .catch(err => {
           console.log(err);
@@ -56,7 +57,7 @@ function App() {
 
   function handleUpdateUser(name, email) {
     mainApi.updateUser(name, email)
-      .then(res => {
+      .then(() => {
         setCurrentUser({ ...currentUser, name, email });
       })
       .catch(err => {
@@ -134,11 +135,44 @@ function App() {
     setSearchInput(search);
   };
 
+  const showSavedMovies = userSavedMovies.filter((movie) => {
+    if (searchInput !== "") {
+      return movie.nameRU.toLowerCase().includes(searchInput);
+    } else return '';
+  });
+
   const searchedMovies = userFoundMovies.filter((movie) => {
     if (searchInput !== "") {
       return movie.nameRU.toLowerCase().includes(searchInput);
     } else return '';
   });
+
+  // const searchedSavedMovies = userSavedMovies.filter((movie) => {
+  //   if (searchInput !== "") {
+  //     return movie.nameRU.toLowerCase().includes(searchInput);
+  //   } else return '';
+  // });
+
+  function handleSaveMovie(card) {
+    const isLiked = card.likes.some(i => i === currentUser._id);
+    MovieApi.saveMovie(card._id)
+      .then((res) => {
+        setUserSavedMovies((state) => state.map((c) => c._id === card._id ? res.data : c));
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+  }
+
+  function handleMovieDelete(card) {
+    MovieApi.deleteMovie(card._id)
+      .then(() => {
+        setUserSavedMovies(items => items.filter(item => item._id !== card._id))
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }
 
   function handleLogout() {
     localStorage.removeItem('token')
@@ -165,6 +199,7 @@ function App() {
             <Header loggedIn={loggedIn} />
             <SearchForm searchMoviesHandler={searchMoviesHandler} />
             <SavedMovies
+              searchedMovies={showSavedMovies}
             />  </Route>
           <Route exact path='/profile'>
             <Header loggedIn={loggedIn} />

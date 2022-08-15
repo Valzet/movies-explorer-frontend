@@ -5,12 +5,17 @@ import FilterCheckbox from "../FilterCheckbox/FilterCheckbox"
 
 
 function SearchForm({searchMoviesHandler, handleCheckbox}) {
+/* убрать кнопку. Заменить submit на onchange */
 
+function submitForm(event) {
+    event.preventDefault()
+}
     return (
         <section className="searchForm">
-            <form className="searchForm__form">
-                <img className="searchForm__decoration" src={searchIcon} alt='Иконка поиска' />
-                <input className="searchForm__input" onChange={searchMoviesHandler}  type="text" placeholder='Фильм' required />
+            <form className="searchForm__form" onSubmit={submitForm} >
+                <img className="searchForm__decoration"  src={searchIcon} alt='Иконка поиска' />
+                
+                <input className="searchForm__input" type="text"  onChange={searchMoviesHandler} placeholder='Фильм' required />
                 <label className="switch">
                     <FilterCheckbox handleCheckbox={handleCheckbox}/>
                 </label>

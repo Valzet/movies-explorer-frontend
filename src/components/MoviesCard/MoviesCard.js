@@ -2,11 +2,12 @@ import "./MoviesCard.css"
 import {useState} from "react";
 
 function Card(props) {
-  const [isLiked, setIsLiked] = useState(props.movies.isLiked);
+  const [isSaved, setSavedCard] = useState();
   function handleLikeClick() {
-    setIsLiked(!isLiked);
+    setSavedCard(!isSaved);
   }
-  const cardLikeButtonClassName = `${isLiked ? 'item__liked' : 'item__addLike'}`;
+
+  const cardLikeButtonClassName = `${isSaved ? 'item__liked' : 'item__addLike'}`;
 
   return (
     <li className="item" >

@@ -29,6 +29,7 @@ function MoviesCardList({ searchedMovies }) {
   })
 
   useEffect(() => { //хук количества отображаемых карточек
+    console.log(searchedMovies)
     setMovieList(searchedMovies.slice(0, cardsCount));
   }, [cardsCount, searchedMovies])
 

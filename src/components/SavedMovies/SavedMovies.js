@@ -1,14 +1,11 @@
 import "./SavedMovies.css"
 import MoviesCardList from "../MoviesCardList/MoviesCardList"
-import { initialMovies } from '../../utils/constans.js'
-import Header from '../Header/Header'
 import Footer from '../Footer/Footer'
 
-function Movies() {
+function Movies({searchedMovies}) {
     return (
         <>
-        <Header /> 
-        <MoviesCardList initialMovies={initialMovies} />
+        <MoviesCardList searchedMovies={searchedMovies}  />
         <Footer />
         </>
     )
