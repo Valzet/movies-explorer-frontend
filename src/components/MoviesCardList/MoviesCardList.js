@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import MoviesCard from '../MoviesCard/MoviesCard'
 import useMediaQuery from "../../hooks/useMediaQuery";
 
-function MoviesCardList({ searchedMovies }) {
+function MoviesCardList({ searchedMovies, userSavedMovies, handleSaveMovie, handleMovieDelete }) {
   const [cardsCount, setCardsCount] = useState(12); //отображаемые карточки
   const [movieList, setMovieList] = useState([]); //список загруженных фильмов
 
@@ -29,7 +29,7 @@ function MoviesCardList({ searchedMovies }) {
   })
 
   useEffect(() => { //хук количества отображаемых карточек
-    console.log(searchedMovies)
+    // console.log(searchedMovies)
     setMovieList(searchedMovies.slice(0, cardsCount));
   }, [cardsCount, searchedMovies])
 
@@ -48,8 +48,11 @@ function MoviesCardList({ searchedMovies }) {
       <ul className="elements__list">
         {movieList.map((movies) => {
           return (<MoviesCard
+            userSavedMovies={userSavedMovies}
+            handleSaveMovie={handleSaveMovie}
+            handleMovieDelete={handleMovieDelete}
             movies={movies}
-            key={movies.id}
+            key={movies.id || movies._id}
           />)
         }
         )}

@@ -2,10 +2,10 @@ import "./SavedMovies.css"
 import MoviesCardList from "../MoviesCardList/MoviesCardList"
 import Footer from '../Footer/Footer'
 
-function Movies({searchedMovies}) {
+function Movies({searchedMovies, userSavedMovies, handleSaveMovie, handleMovieDelete}) {
     return (
         <>
-        <MoviesCardList searchedMovies={searchedMovies}  />
+        <MoviesCardList searchedMovies={searchedMovies}  userSavedMovies={userSavedMovies} handleSaveMovie={handleSaveMovie} handleMovieDelete={handleMovieDelete}/>
         <Footer />
         </>
     )

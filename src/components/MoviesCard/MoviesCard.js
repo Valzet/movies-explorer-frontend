@@ -1,9 +1,33 @@
 import "./MoviesCard.css"
-import {useState} from "react";
+import {useEffect, useState} from "react";
 
 function Card(props) {
-  const [isSaved, setSavedCard] = useState();
+  const [isSaved, setSavedCard] = useState(false);
+  const [movieId, setMovieId] = useState('');
+  useEffect(() => {
+    props.userSavedMovies.map((c) => {
+      if(c.movieId === props.movies.id) {
+        setSavedCard(true)
+        setMovieId(c._id)
+        console.log(c._id)
+      } else if (c.movieId === props.movies.movieId){
+        setSavedCard(false)
+      }})
+  }, [props.userSavedMovies])
+
+
+
+  function saveMovie() {
+    if(!isSaved) {
+      props.handleSaveMovie(props.movies)
+    } else {
+      props.handleMovieDelete(movieId)
+      console.log(movieId)
+    }
+  }
+
   function handleLikeClick() {
+    saveMovie();
     setSavedCard(!isSaved);
   }
 

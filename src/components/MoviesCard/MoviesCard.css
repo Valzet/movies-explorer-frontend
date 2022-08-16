@@ -93,7 +93,7 @@
   opacity: 0;
 }
 
-.item__img:hover+.item__addLike {
+.item__image-link:hover+.item__addLike {
   opacity: 1;
   transition: opacity 0.2s ease;
 }

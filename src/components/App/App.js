@@ -153,21 +153,24 @@ function App() {
   //   } else return '';
   // });
 
-  function handleSaveMovie(card) {
-    const isLiked = card.likes.some(i => i === currentUser._id);
-    MovieApi.saveMovie(card._id)
+  function handleSaveMovie(movie) {
+    console.log(movie)
+    // const isSaved = movie.find(i => i === currentUser._id);
+    mainApi.saveMovie(movie)
       .then((res) => {
-        setUserSavedMovies((state) => state.map((c) => c._id === card._id ? res.data : c));
+        setUserSavedMovies((state) => state.map((c) => c._id === movie._id ? res.data : c));
+        console.log(res)
       })
       .catch((err) => {
         console.log(err);
       })
   }
 
-  function handleMovieDelete(card) {
-    MovieApi.deleteMovie(card._id)
-      .then(() => {
-        setUserSavedMovies(items => items.filter(item => item._id !== card._id))
+  function handleMovieDelete(movie) {
+    console.log(movie)
+    mainApi.deleteMovie(movie)
+      .then((res) => {
+        setUserSavedMovies(items => items.filter(item => item._id !== res._id))
       })
       .catch(err => {
         console.log(err);
@@ -193,13 +196,19 @@ function App() {
             <Header loggedIn={loggedIn} />
             <SearchForm searchMoviesHandler={searchMoviesHandler} handleCheckbox={handleCheckbox} />
             <Movies
+            userSavedMovies={userSavedMovies}
               searchedMovies={searchedMovies}
+              handleSaveMovie={handleSaveMovie}
+              handleMovieDelete={handleMovieDelete}
             /> </Route>
           <Route exact path='/saved-movies'>
             <Header loggedIn={loggedIn} />
             <SearchForm searchMoviesHandler={searchMoviesHandler} />
             <SavedMovies
               searchedMovies={showSavedMovies}
+              userSavedMovies={userSavedMovies}
+              handleSaveMovie={handleSaveMovie}
+              handleMovieDelete={handleMovieDelete}
             />  </Route>
           <Route exact path='/profile'>
             <Header loggedIn={loggedIn} />
