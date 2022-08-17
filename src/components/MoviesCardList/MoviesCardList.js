@@ -21,7 +21,9 @@ function MoviesCardList({ searchedMovies, userSavedMovies, handleSaveMovie, hand
     }
   }
 
+  console.log(searchedMovies)
   useEffect(() => { //хук ресайза 
+    // setMovieList(searchedMovies.slice(0, cardsCount));
     const timer = setTimeout(() => {
       window.addEventListener('resize', mediaQueryHooks);
     }, 100);
@@ -29,9 +31,11 @@ function MoviesCardList({ searchedMovies, userSavedMovies, handleSaveMovie, hand
   })
 
   useEffect(() => { //хук количества отображаемых карточек
-    // console.log(searchedMovies)
+    // const timer = setInterval(() => {
     setMovieList(searchedMovies.slice(0, cardsCount));
-  }, [cardsCount, searchedMovies])
+  // }, 1000)
+  // return () => clearInterval(timer)
+  }, [cardsCount, searchedMovies, setMovieList])
 
   function handleAddMoreCards() { //дополнительные карточки
     if (isDesktop && !isMobile && !isTablet) {

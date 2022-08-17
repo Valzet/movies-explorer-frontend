@@ -2,6 +2,7 @@ import './Profile.css'
 import React from "react";
 import CurrentUserContext from '../../contexts/CurrentUserContext'
 import { useState, useEffect } from "react";
+import useFormValidation from "../../hooks/useFormValidation";
 
 function Profile(props) {
   // Подписка на контекст

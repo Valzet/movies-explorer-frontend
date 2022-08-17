@@ -3,14 +3,12 @@ export const BASE_URL = 'http://localhost:3001';
 
 const _checkResponse = (res) => {
   if (res.ok) {
-      return res.json();
+    return res.json();
   }
-
   return res.json()
-      .then((data) => {
-          console.log('возвращаем данные', data)
-          throw new Error(data.message[0].messages[0]);
-      });
+    .then((data) => {
+      throw new Error(data.message[0].messages[0]);
+    });
 };
 const _getToken = () => {
   return `Bearer ${localStorage.getItem('token')}`;
@@ -61,13 +59,11 @@ export const deleteMovie = (id) => {
 }
 
 export const register = (name, email, password) => {
-  console.log(name, email, password);
   return fetch(`${BASE_URL}/signup`, {
     method: 'POST',
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ name, email, password })
   })
-  .then(console.log(fetch))
     .then(_checkResponse)
 }
 
@@ -77,7 +73,7 @@ export const authorize = (email, password) => {
     headers: {
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify( email, password )
+    body: JSON.stringify(email, password)
   })
     .then(_checkResponse)
 }

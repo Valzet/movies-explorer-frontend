@@ -17,11 +17,23 @@ function App() {
   const [allMovies, setAllMovies] = useState([]);
   const [userFoundMovies, setUserFoundMovies] = useState([]);
   const [userSavedMovies, setUserSavedMovies] = useState([]);
-  const [checkBoxActive, setCheckboxActive] = useState(true)
+  const [checkBoxActive, setCheckboxActive] = useState(true);
   const [loggedIn, setLoggedIn] = useState(false);
   const [searchInput, setSearchInput] = useState('');
-  const [currentUser, setCurrentUser] = useState('')
+  const [currentUser, setCurrentUser] = useState('');
   const history = useHistory();
+
+  const showSavedMovies = userSavedMovies.filter((movie) => {
+    if (searchInput !== "") {
+      return movie.nameRU.toLowerCase().includes(searchInput);
+    } else return userSavedMovies;
+  }, [userSavedMovies]);
+
+  const searchedMovies = userFoundMovies.filter((movie) => {
+    if (searchInput !== "") {
+      return movie.nameRU.toLowerCase().includes(searchInput);
+    } else return '';
+  });
 
   useEffect(() => {
     if (loggedIn) {
@@ -32,28 +44,25 @@ function App() {
         .catch(err => {
           console.log(err);
         })
+
+      // const timer = setInterval(() => {
+      // if (loggedIn)
       mainApi.getSavedMovies()
         .then((data) => {
-          setUserSavedMovies(data)
-          localStorage.setItem('saved-movies', JSON.stringify(data));
+          setUserSavedMovies(data);
+          localStorage.setItem("userSavedMovies", data);
         })
         .catch(err => {
           console.log(err);
+          //     }, 1000)
+          // return () => clearInterval(timer)
         });
     }
-  }, [loggedIn])
+  }, [loggedIn, setUserSavedMovies])
 
   useEffect(() => {
     tokenCheck();
   }, [])
-
-  // useEffect(() => {
-  //   if (loggedIn) {
-  //     history.push("/movies");
-  //     return;
-  //   }
-
-  // }, [loggedIn, history]);
 
   function handleUpdateUser(name, email) {
     mainApi.updateUser(name, email)
@@ -107,7 +116,6 @@ function App() {
     MovieApi.getMovies()
       .then((data) => {
         setAllMovies(data);
-        localStorage.setItem('movies', JSON.stringify(data));
       })
       .catch((err) => {
         console.log(err);
@@ -126,40 +134,24 @@ function App() {
     let filteredMovies
     if (!checkBoxActive) {
       filteredMovies = allMovies.filter(movie => movie.duration <= 40)
-    } else if (checkBoxActive) { filteredMovies = allMovies }
+    } else if (checkBoxActive) {
+      filteredMovies = allMovies
+    }
     setUserFoundMovies(filteredMovies)
+
   }, [checkBoxActive, allMovies])
+
 
   const searchMoviesHandler = (event) => {
     const search = event.target.value.toLowerCase();
     setSearchInput(search);
   };
 
-  const showSavedMovies = userSavedMovies.filter((movie) => {
-    if (searchInput !== "") {
-      return movie.nameRU.toLowerCase().includes(searchInput);
-    } else return '';
-  });
-
-  const searchedMovies = userFoundMovies.filter((movie) => {
-    if (searchInput !== "") {
-      return movie.nameRU.toLowerCase().includes(searchInput);
-    } else return '';
-  });
-
-  // const searchedSavedMovies = userSavedMovies.filter((movie) => {
-  //   if (searchInput !== "") {
-  //     return movie.nameRU.toLowerCase().includes(searchInput);
-  //   } else return '';
-  // });
-
-  function handleSaveMovie(movie) {
-    console.log(movie)
-    // const isSaved = movie.find(i => i === currentUser._id);
+  function handleSaveMovie(movie, setMovieId) {
     mainApi.saveMovie(movie)
       .then((res) => {
+        setMovieId(res._id);
         setUserSavedMovies((state) => state.map((c) => c._id === movie._id ? res.data : c));
-        console.log(res)
       })
       .catch((err) => {
         console.log(err);
@@ -167,15 +159,26 @@ function App() {
   }
 
   function handleMovieDelete(movie) {
-    console.log(movie)
     mainApi.deleteMovie(movie)
       .then((res) => {
-        setUserSavedMovies(items => items.filter(item => item._id !== res._id))
+        setUserSavedMovies((state) => state.filter((c) => c._id !== res._id))
       })
       .catch(err => {
         console.log(err);
       });
   }
+
+  // let showSavedMovies = userSavedMovies.filter((movie) => {
+  //   if (searchInput !== "") {
+  //     return movie.nameRU.toLowerCase().includes(searchInput);
+  //   } else return userSavedMovies;
+  // });
+
+  // let searchedMovies = userFoundMovies.filter((movie) => {
+  //   if (searchInput !== "") {
+  //     return movie.nameRU.toLowerCase().includes(searchInput);
+  //   } else return '';
+  // });
 
   function handleLogout() {
     localStorage.removeItem('token')
@@ -196,8 +199,8 @@ function App() {
             <Header loggedIn={loggedIn} />
             <SearchForm searchMoviesHandler={searchMoviesHandler} handleCheckbox={handleCheckbox} />
             <Movies
-            userSavedMovies={userSavedMovies}
               searchedMovies={searchedMovies}
+              userSavedMovies={userSavedMovies}
               handleSaveMovie={handleSaveMovie}
               handleMovieDelete={handleMovieDelete}
             /> </Route>

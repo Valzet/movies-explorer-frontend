@@ -1,28 +1,27 @@
 import "./MoviesCard.css"
-import {useEffect, useState} from "react";
+import { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 
 function Card(props) {
   const [isSaved, setSavedCard] = useState(false);
   const [movieId, setMovieId] = useState('');
+
   useEffect(() => {
-    props.userSavedMovies.map((c) => {
-      if(c.movieId === props.movies.id) {
+   props.userSavedMovies.map((c) => {
+      if (c.movieId === props.movies.id || props.movies.movieId) {
         setSavedCard(true)
         setMovieId(c._id)
-        console.log(c._id)
-      } else if (c.movieId === props.movies.movieId){
-        setSavedCard(false)
-      }})
-  }, [props.userSavedMovies])
+      }
+    })
 
-
+  }, [props.userSavedMovies, props.movies.id, props.movies.movieId])
 
   function saveMovie() {
-    if(!isSaved) {
-      props.handleSaveMovie(props.movies)
-    } else {
-      props.handleMovieDelete(movieId)
-      console.log(movieId)
+    if (!isSaved) {
+      props.handleSaveMovie(props.movies, setMovieId)
+    } else if (isSaved) {
+      props.handleMovieDelete(props.movies._id || movieId)
+      setSavedCard(false)
     }
   }
 
@@ -33,10 +32,14 @@ function Card(props) {
 
   const cardLikeButtonClassName = `${isSaved ? 'item__liked' : 'item__addLike'}`;
 
+  const path = useLocation();
+
   return (
     <li className="item" >
       <a className="item__image-link" target="_blank" rel="noreferrer" href={props.movies.trailerLink}>
-      <img className="item__img" src={`https://api.nomoreparties.co${props.movies.image.url}`} alt={props.movies.nameRU} />
+        <img className="item__img"
+          src={path.pathname === '/movies' ? `https://api.nomoreparties.co${props.movies.image.url}` : `${props.movies.image}`}
+          alt={props.movies.nameRU} />
       </a>
       <button type="button" aria-label="Лайк" className={cardLikeButtonClassName} onClick={handleLikeClick}></button>
       <div className="item__about">
