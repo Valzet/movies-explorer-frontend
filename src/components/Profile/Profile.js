@@ -3,6 +3,7 @@ import React from "react";
 import CurrentUserContext from '../../contexts/CurrentUserContext'
 import { useState, useEffect } from "react";
 import { useHistory } from 'react-router-dom';
+import Header from "../Header/Header";
 
 function Profile(props) {
   let history = useHistory();
@@ -64,38 +65,40 @@ function Profile(props) {
   }
 
   return (
-    <form className='profile__form' >
-      <h2 className='profile__title'>Привет, {currentUser.name}! </h2>
-      <div className='profile__inputs'>
-        <div className='profile__input-area'>
-          <p className='profile__subtext'>Имя</p>
-          <input className='profile__input' value={name || ''} onChange={handleNameChange} disabled={isDisabled} />
+    <>
+      <Header loggedIn={props.loggedIn} />
+      <form className='profile__form' >
+        <h2 className='profile__title'>Привет, {currentUser.name}! </h2>
+        <div className='profile__inputs'>
+          <div className='profile__input-area'>
+            <p className='profile__subtext'>Имя</p>
+            <input className='profile__input' value={name || ''} onChange={handleNameChange} disabled={isDisabled} />
+          </div>
+          <span className="profile__error-message">
+            {nameError}
+          </span>
+          <div className='profile__input-area'>
+            <p className='profile__subtext'>E-mail</p>
+            <input className='profile__input' value={email || ''} onChange={handleEmailChange} disabled={isDisabled} />
+          </div>
+          <span className="profile__error-message ">
+            {emailError}
+          </span>
         </div>
-        <span className="profile__error-message">
-          {nameError}
-        </span>
-        <div className='profile__input-area'>
-          <p className='profile__subtext'>E-mail</p>
-          <input className='profile__input' value={email || ''} onChange={handleEmailChange} disabled={isDisabled} />
-        </div>
-        <span className="profile__error-message ">
-          {emailError}
-        </span>
-      </div>
-      
-      { isDisabled ? ( <div className='form__buttons'><button type='submit' className='form__button form__buttons_type_edit' onClick={setDisabledStatus} >Редактировать</button> 
-        <button type='submit' className='form__button form__buttons_type_logout' onClick={props.handleLogout}>Выйти из аккаунта</button> </div>) 
-        : <button className='form__save-button' type="submit" onClick={handleSubmit} disabled={
-          nameValid === false ||
-          emailValid === false ||
-          (name === currentUser.name && email === currentUser.email)
-        }>Сохранить</button> }
-         
-      
 
-    </form>
+        {isDisabled ? (<div className='form__buttons'><button type='submit' className='form__button form__buttons_type_edit' onClick={setDisabledStatus} >Редактировать</button>
+          <button type='submit' className='form__button form__buttons_type_logout' onClick={props.handleLogout}>Выйти из аккаунта</button> </div>)
+          : <button className='form__save-button' type="submit" onClick={handleSubmit} disabled={
+            nameValid === false ||
+            emailValid === false ||
+            (name === currentUser.name && email === currentUser.email)
+          }>Сохранить</button>}
 
 
+
+      </form>
+
+    </>
   )
 }
 

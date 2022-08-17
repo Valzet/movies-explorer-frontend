@@ -12,7 +12,7 @@ import { useState, useEffect } from "react";
 import * as mainApi from '../../utils/MainApi'
 import CurrentUserContext from '../../contexts/CurrentUserContext'
 import Header from '../Header/Header';
-import SearchForm from "../SearchForm/SearchForm"
+import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 function App() {
   const [allMovies, setAllMovies] = useState([]);
   const [userFoundMovies, setUserFoundMovies] = useState([]);
@@ -108,7 +108,7 @@ function App() {
   const handleRegister = (name, email, password) => {
     mainApi.register(name, email, password)
       .then(() => {
-        history.push('/signin');
+        handleLogin(email, password)
       })
       .catch(err => {
         console.log(err);
@@ -175,6 +175,8 @@ function App() {
     setLoggedIn(false);
     history.push("/");
   }
+
+  console.log(loggedIn)
   return (
     <div className="content">
       <CurrentUserContext.Provider value={currentUser}>
@@ -185,28 +187,33 @@ function App() {
             <Header loggedIn={loggedIn} />
             <Main />
           </Route>
-          <Route exact path='/movies'>
-            <Header loggedIn={loggedIn} />
-            <SearchForm searchMoviesHandler={searchMoviesHandler} handleCheckbox={handleCheckbox} />
-            <Movies
-              searchedMovies={searchedMovies}
-              userSavedMovies={userSavedMovies}
-              handleSaveMovie={handleSaveMovie}
-              handleMovieDelete={handleMovieDelete}
-            /> </Route>
-          <Route exact path='/saved-movies'>
-            <Header loggedIn={loggedIn} />
-            <SearchForm searchMoviesHandler={searchMoviesHandler} handleCheckbox={handleCheckbox} />
-            <SavedMovies
-              searchedMovies={showSavedMovies}
-              userSavedMovies={userSavedMovies}
-              handleSaveMovie={handleSaveMovie}
-              handleMovieDelete={handleMovieDelete}
-              handleSavedMoviesSearch={handleSavedMoviesSearch}
-            />  </Route>
-          <Route exact path='/profile'>
-            <Header loggedIn={loggedIn} />
-            <Profile onUpdateUser={handleUpdateUser} handleLogout={handleLogout} /> </Route>
+          <ProtectedRoute
+            exact path='/movies' loggedIn={loggedIn}
+            component={Movies}
+            searchedMovies={searchedMovies}
+            userSavedMovies={userSavedMovies}
+            handleSaveMovie={handleSaveMovie}
+            handleMovieDelete={handleMovieDelete}
+            searchMoviesHandler={searchMoviesHandler}
+            handleCheckbox={handleCheckbox}
+          />
+          <ProtectedRoute exact path='/saved-movies'
+            loggedIn={loggedIn}
+            component={SavedMovies}
+            searchedMovies={showSavedMovies}
+            userSavedMovies={userSavedMovies}
+            handleSaveMovie={handleSaveMovie}
+            handleMovieDelete={handleMovieDelete}
+            handleSavedMoviesSearch={handleSavedMoviesSearch}
+            searchMoviesHandler={searchMoviesHandler}
+            handleCheckbox={handleCheckbox}
+          />
+          <ProtectedRoute exact path='/profile'
+            component={Profile}
+            loggedIn={loggedIn}
+            onUpdateUser={handleUpdateUser}
+            handleLogout={handleLogout}
+          />
           <Route path='/*'> <NotFound /> </Route>
         </Switch>
       </CurrentUserContext.Provider>
