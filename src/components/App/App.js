@@ -44,9 +44,6 @@ function App() {
         .catch(err => {
           console.log(err);
         })
-
-      // const timer = setInterval(() => {
-      // if (loggedIn)
       mainApi.getSavedMovies()
         .then((data) => {
           setUserSavedMovies(data);
@@ -54,15 +51,21 @@ function App() {
         })
         .catch(err => {
           console.log(err);
-          //     }, 1000)
-          // return () => clearInterval(timer)
         });
     }
-  }, [loggedIn, setUserSavedMovies])
+  }, [loggedIn])
 
   useEffect(() => {
     tokenCheck();
   }, [])
+
+  function handleSavedMoviesSearch() {
+    mainApi.getSavedMovies()
+      .then((data) => {
+        setUserSavedMovies(data);
+      })
+      .catch((err) => console.log(err));
+  }
 
   function handleUpdateUser(name, email) {
     mainApi.updateUser(name, email)
@@ -138,9 +141,7 @@ function App() {
       filteredMovies = allMovies
     }
     setUserFoundMovies(filteredMovies)
-
   }, [checkBoxActive, allMovies])
-
 
   const searchMoviesHandler = (event) => {
     const search = event.target.value.toLowerCase();
@@ -162,23 +163,12 @@ function App() {
     mainApi.deleteMovie(movie)
       .then((res) => {
         setUserSavedMovies((state) => state.filter((c) => c._id !== res._id))
+        handleSavedMoviesSearch()
       })
       .catch(err => {
         console.log(err);
       });
   }
-
-  // let showSavedMovies = userSavedMovies.filter((movie) => {
-  //   if (searchInput !== "") {
-  //     return movie.nameRU.toLowerCase().includes(searchInput);
-  //   } else return userSavedMovies;
-  // });
-
-  // let searchedMovies = userFoundMovies.filter((movie) => {
-  //   if (searchInput !== "") {
-  //     return movie.nameRU.toLowerCase().includes(searchInput);
-  //   } else return '';
-  // });
 
   function handleLogout() {
     localStorage.removeItem('token')
@@ -212,6 +202,7 @@ function App() {
               userSavedMovies={userSavedMovies}
               handleSaveMovie={handleSaveMovie}
               handleMovieDelete={handleMovieDelete}
+              handleSavedMoviesSearch={handleSavedMoviesSearch}
             />  </Route>
           <Route exact path='/profile'>
             <Header loggedIn={loggedIn} />

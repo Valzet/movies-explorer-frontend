@@ -7,13 +7,12 @@ function Card(props) {
   const [movieId, setMovieId] = useState('');
 
   useEffect(() => {
-   props.userSavedMovies.map((c) => {
+    props.userSavedMovies.map((c) => {
       if (c.movieId === props.movies.id || props.movies.movieId) {
         setSavedCard(true)
         setMovieId(c._id)
       }
     })
-
   }, [props.userSavedMovies, props.movies.id, props.movies.movieId])
 
   function saveMovie() {
@@ -24,14 +23,12 @@ function Card(props) {
       setSavedCard(false)
     }
   }
-
   function handleLikeClick() {
     saveMovie();
     setSavedCard(!isSaved);
   }
 
   const cardLikeButtonClassName = `${isSaved ? 'item__liked' : 'item__addLike'}`;
-
   const path = useLocation();
 
   return (
