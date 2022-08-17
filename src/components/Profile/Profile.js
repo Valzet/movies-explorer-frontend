@@ -21,6 +21,7 @@ function Profile(props) {
   const [nameValid, setNameValid] = useState();
   const [nameError, setNameError] = useState("");
   const [isDisabled, setIsDisabled] = useState(true)
+  const [successMsg, setSuccessMsg] = useState("");
 
   function handleEmailChange(e) {
     let emailInputValue = /\S+@\S+\.\S+/.test(
@@ -37,7 +38,6 @@ function Profile(props) {
   function handleNameChange(e) {
     let nameInputValue = /^[a-zA-Zа-яА-Я-]{2,30}/.test(
       e.target.value)
-    console.log(nameInputValue)
     setNameValid(nameInputValue)
     if (!nameInputValue) {
       setNameError("Некорректно введено имя")
@@ -52,9 +52,11 @@ function Profile(props) {
     props.onUpdateUser(
       name, email
     );
-    setIsDisabled(true)
+    pushSuccessMsg()
+    
     const timer = setTimeout(() => {
       history.goBack()
+      setIsDisabled(true)
     }, 2500);
     return () => clearTimeout(timer);
   }
@@ -62,6 +64,14 @@ function Profile(props) {
   function setDisabledStatus(e) {
     e.preventDefault();
     setIsDisabled(false)
+  }
+
+  function pushSuccessMsg() {
+    setSuccessMsg("Данные успешно обновлены")
+  }
+
+  function cancelEdit() {
+    setIsDisabled(true)
   }
 
   return (
@@ -85,18 +95,19 @@ function Profile(props) {
             {emailError}
           </span>
         </div>
-
         {isDisabled ? (<div className='form__buttons'><button type='submit' className='form__button form__buttons_type_edit' onClick={setDisabledStatus} >Редактировать</button>
           <button type='submit' className='form__button form__buttons_type_logout' onClick={props.handleLogout}>Выйти из аккаунта</button> </div>)
-          : <button className='form__save-button' type="submit" onClick={handleSubmit} disabled={
+          : <><span className='form__message'>{successMsg}</span> <button className='form__save-button' type="submit" onClick={handleSubmit} disabled={
             nameValid === false ||
             emailValid === false ||
             (name === currentUser.name && email === currentUser.email)
-          }>Сохранить</button>}
-
-
+          }>Сохранить</button> 
+          <button onClick={cancelEdit} className='form__button form__buttons_type_logout'>Отмена</button>
+          </>}
 
       </form>
+
+
 
     </>
   )

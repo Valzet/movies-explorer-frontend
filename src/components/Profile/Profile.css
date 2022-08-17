@@ -94,6 +94,7 @@
     height: 45px;
     cursor: pointer;
 }
+
 .form__save-button:disabled {
     background-color: #4d4d4d;
     cursor: none;
@@ -111,6 +112,13 @@
     padding-bottom: 6px;
 }
 
+.form__message {
+    font-size: 15px;
+    font-weight: 500;
+    line-height: 13px;
+    color: green;
+    padding-bottom: 7px;
+}
 @media screen and (max-width: 769px) {
     .profile__form {
         padding-top: 30%;
