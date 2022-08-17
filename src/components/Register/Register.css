@@ -24,9 +24,8 @@
 .register__input-area {
     border-bottom: 1px solid #E8E8E8;
     padding-bottom: 10px;
-    margin-bottom: 24px;
+    /* margin-bottom: 24px; */
     width: 410px;
-
 }
 
 .register__input-area:last-of-type {
@@ -81,6 +80,10 @@
     height: 45px;
 }
 
+.register__buttons_type_register:disabled {
+    background-color: #4d4d4d;
+}
+
 .register__buttons_type_login {
     font-weight: 400;
     color: #EE3465;
@@ -95,13 +98,23 @@
     line-height: 17px;
     text-align: center;
     color: #A0A0A0;
-
-
 }
 
 .register__button-login {
     display: flex;
     flex-direction: row;
+}
+
+.profile__error-message {
+    display: block;
+    font-size: 11px;
+    font-weight: 400;
+    line-height: 13px;
+    text-align: left;
+    color: red;
+    background-color: transparent;
+    height: 24px;
+    padding-bottom: 6px;
 }
 
 @media screen and (max-width: 580px) {

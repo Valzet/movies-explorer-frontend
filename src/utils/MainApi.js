@@ -25,6 +25,7 @@ export const getSavedMovies = () => {
 }
 
 export const saveMovie = (movie) => {
+  console.log(movie)
   return fetch(`${BASE_URL}/movies`, {
     method: 'POST',
     headers: {
@@ -73,7 +74,7 @@ export const authorize = (email, password) => {
     headers: {
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify(email, password)
+    body: JSON.stringify({ email, password })
   })
     .then(_checkResponse)
 }

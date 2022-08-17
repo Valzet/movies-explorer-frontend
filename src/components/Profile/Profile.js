@@ -2,13 +2,12 @@ import './Profile.css'
 import React from "react";
 import CurrentUserContext from '../../contexts/CurrentUserContext'
 import { useState, useEffect } from "react";
-import useFormValidation from "../../hooks/useFormValidation";
+import { useHistory } from 'react-router-dom';
 
 function Profile(props) {
-  // Подписка на контекст
+  let history = useHistory();
   const currentUser = React.useContext(CurrentUserContext);
-  // После загрузки текущего пользователя из API
-  // его данные будут использованы в управляемых компонентах.
+
   useEffect(() => {
     setName(currentUser.name);
     setEmail(currentUser.email);
@@ -16,42 +15,83 @@ function Profile(props) {
 
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
+  const [emailValid, setEmailValid] = useState();
+  const [emailError, setEmailError] = useState("");
+  const [nameValid, setNameValid] = useState();
+  const [nameError, setNameError] = useState("");
+  const [isDisabled, setIsDisabled] = useState(true)
 
   function handleEmailChange(e) {
+    let emailInputValue = /\S+@\S+\.\S+/.test(
+      e.target.value)
+    setEmailValid(emailInputValue)
+    if (!emailInputValue) {
+      setEmailError("Некорректно введен Email");
+    } else {
+      setEmailError("")
+    }
     setEmail(e.target.value);
   }
 
   function handleNameChange(e) {
+    let nameInputValue = /^[a-zA-Zа-яА-Я-]{2,30}/.test(
+      e.target.value)
+    console.log(nameInputValue)
+    setNameValid(nameInputValue)
+    if (!nameInputValue) {
+      setNameError("Некорректно введено имя")
+    } else {
+      setNameError("")
+    }
     setName(e.target.value);
   }
 
   function handleSubmit(e) {
-    // Запрещаем браузеру переходить по адресу формы
     e.preventDefault();
-
-    // Передаём значения управляемых компонентов во внешний обработчик
     props.onUpdateUser(
       name, email
     );
+    setIsDisabled(true)
+    const timer = setTimeout(() => {
+      history.goBack()
+    }, 2500);
+    return () => clearTimeout(timer);
+  }
+
+  function setDisabledStatus(e) {
+    e.preventDefault();
+    setIsDisabled(false)
   }
 
   return (
     <form className='profile__form' >
-      <h2 className='profile__title'>Привет, {name}! </h2>
+      <h2 className='profile__title'>Привет, {currentUser.name}! </h2>
       <div className='profile__inputs'>
         <div className='profile__input-area'>
           <p className='profile__subtext'>Имя</p>
-          <input className='profile__input' value={name || ''} onChange={handleNameChange} />
+          <input className='profile__input' value={name || ''} onChange={handleNameChange} disabled={isDisabled} />
         </div>
+        <span className="profile__error-message">
+          {nameError}
+        </span>
         <div className='profile__input-area'>
           <p className='profile__subtext'>E-mail</p>
-          <input className='profile__input' value={email || ''} onChange={handleEmailChange} />
+          <input className='profile__input' value={email || ''} onChange={handleEmailChange} disabled={isDisabled} />
         </div>
+        <span className="profile__error-message ">
+          {emailError}
+        </span>
       </div>
-      <div className='form__buttons'>
-        <button type='submit' className='form__button form__buttons_type_edit' onClick={handleSubmit}>Редактировать</button>
-        <button type='submit' className='form__button form__buttons_type_logout' onClick={props.handleLogout}>Выйти из аккаунта</button>
-      </div>
+      
+      { isDisabled ? ( <div className='form__buttons'><button type='submit' className='form__button form__buttons_type_edit' onClick={setDisabledStatus} >Редактировать</button> 
+        <button type='submit' className='form__button form__buttons_type_logout' onClick={props.handleLogout}>Выйти из аккаунта</button> </div>) 
+        : <button className='form__save-button' type="submit" onClick={handleSubmit} disabled={
+          nameValid === false ||
+          emailValid === false ||
+          (name === currentUser.name && email === currentUser.email)
+        }>Сохранить</button> }
+         
+      
 
     </form>
 

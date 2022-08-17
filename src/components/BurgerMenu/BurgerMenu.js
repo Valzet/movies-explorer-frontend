@@ -1,25 +1,8 @@
 import "./BurgerMenu.css"
 import { useState } from "react";
-import { Link,
-    //  useLocation 
-    } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 function BurgerMenu() {
-
-    // const path = useLocation();
-
-    // function useCurrentLocation() {
-    //     switch (path.pathname) {
-    //         case '/profile':
-    //             return ("burger__link-underline");
-    //         case '/movies':
-    //             return ("burger__link-underline");
-    //         case '/saved-movies':
-    //             return ("burger__link-underline");
-    //         default:
-    //             return ("burger__link")
-    //     }
-    // }
     const [isBurgerOpen, setBurgerOpen] = useState(false);
 
     function handleOpenBurger() {

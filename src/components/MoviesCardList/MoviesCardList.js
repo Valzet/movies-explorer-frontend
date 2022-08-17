@@ -29,10 +29,7 @@ function MoviesCardList({ searchedMovies, userSavedMovies, handleSaveMovie, hand
   })
 
   useEffect(() => { //хук количества отображаемых карточек
-    console.log(cardsCount, 'cardsCount')
-
     setMovieList(searchedMovies.slice(0, cardsCount));
-
   }, [cardsCount, searchedMovies, setMovieList])
 
   function handleAddMoreCards() { //дополнительные карточки

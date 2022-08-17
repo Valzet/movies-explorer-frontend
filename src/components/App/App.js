@@ -27,7 +27,7 @@ function App() {
     if (searchInput !== "") {
       return movie.nameRU.toLowerCase().includes(searchInput);
     } else return userSavedMovies;
-  }, [userSavedMovies]);
+  });
 
   const searchedMovies = userFoundMovies.filter((movie) => {
     if (searchInput !== "") {
@@ -196,7 +196,7 @@ function App() {
             /> </Route>
           <Route exact path='/saved-movies'>
             <Header loggedIn={loggedIn} />
-            <SearchForm searchMoviesHandler={searchMoviesHandler} />
+            <SearchForm searchMoviesHandler={searchMoviesHandler} handleCheckbox={handleCheckbox} />
             <SavedMovies
               searchedMovies={showSavedMovies}
               userSavedMovies={userSavedMovies}
