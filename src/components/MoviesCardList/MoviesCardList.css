@@ -33,6 +33,15 @@
     cursor: pointer;
 }
 
+.elements__foundError {
+    display: flex;
+    justify-content: center;
+    color: #ce1b1b;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 20px;
+}
+
 @media screen and (max-width: 769px) {
     .elements__list {
         grid-template-columns: repeat(auto-fit, 330px);

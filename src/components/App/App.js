@@ -17,10 +17,12 @@ function App() {
   const [allMovies, setAllMovies] = useState([]);
   const [userFoundMovies, setUserFoundMovies] = useState([]);
   const [userSavedMovies, setUserSavedMovies] = useState([]);
-  const [checkBoxActive, setCheckboxActive] = useState(true);
-  const [loggedIn, setLoggedIn] = useState(false);
+  const [userSavedMoviesCopy, setUserSavedMoviesCopy] = useState([]);
+  const [checkBoxActive, setCheckboxActive] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(true || false);
   const [searchInput, setSearchInput] = useState('');
   const [currentUser, setCurrentUser] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
   const history = useHistory();
 
   const showSavedMovies = userSavedMovies.filter((movie) => {
@@ -47,7 +49,8 @@ function App() {
       mainApi.getSavedMovies()
         .then((data) => {
           setUserSavedMovies(data);
-          localStorage.setItem("userSavedMovies", data);
+          setUserSavedMoviesCopy(data);
+          localStorage.setItem("userSavedMovies", JSON.stringify(data));
         })
         .catch(err => {
           console.log(err);
@@ -56,6 +59,8 @@ function App() {
   }, [loggedIn])
 
   useEffect(() => {
+    const isLoggedIn = localStorage.getItem('loggedIn')
+    setLoggedIn(isLoggedIn)
     tokenCheck();
   }, [])
 
@@ -63,6 +68,7 @@ function App() {
     mainApi.getSavedMovies()
       .then((data) => {
         setUserSavedMovies(data);
+        setUserSavedMoviesCopy(data);
       })
       .catch((err) => console.log(err));
   }
@@ -84,6 +90,7 @@ function App() {
         .then((res) => {
           if (res) {
             setLoggedIn(true);
+            localStorage.setItem('loggedIn', loggedIn)
           }
         })
         .catch(err => {
@@ -97,7 +104,6 @@ function App() {
       .then((res) => {
         localStorage.setItem('token', res.token);
         tokenCheck();
-        setLoggedIn(true);
         history.push("/movies");
       })
       .catch(err => {
@@ -115,37 +121,74 @@ function App() {
       })
   }
 
-  useEffect(() => {
-    MovieApi.getMovies()
-      .then((data) => {
-        setAllMovies(data);
-      })
-      .catch((err) => {
-        console.log(err);
-      })
-  }, [])
+  function getMovies() {
+    if (!localStorage.getItem('allMovies')) {
+      setIsLoading(true);
+      const timer = setTimeout(() => {
+        MovieApi.getMovies()
+          .then((downloadedFilms) => {
+            setAllMovies(downloadedFilms);
+            localStorage.setItem('allMovies', JSON.stringify(downloadedFilms))
+          })
+          .catch((err) => {
+            console.log(err);
+          })
+          .finally(() => {
+            setIsLoading(false);
+          })
+      }, 2000);
+      return () => clearTimeout(timer);
+    } else if (localStorage.getItem('allMovies')) {
+      const loadedMovies = JSON.parse(localStorage.getItem('allMovies'))
+      setAllMovies(loadedMovies)
+    }
+  }
 
   const handleCheckbox = () => {
+    localStorage.getItem('checkboxLocal')
+    if (!localStorage.getItem('checkboxLocal')) {
+      localStorage.setItem('checkboxLocal', checkBoxActive)
+    }
     if (checkBoxActive) {
       setCheckboxActive(false)
-    } else {
+    } else if (!checkBoxActive) {
       setCheckboxActive(true)
     }
   }
 
   useEffect(() => {
+    localStorage.getItem('checkboxLocal')
     let filteredMovies
-    if (!checkBoxActive) {
+    if (checkBoxActive) {
+      filteredMovies = userSavedMoviesCopy.filter(movie => movie.duration <= 40)
+    } else if (!checkBoxActive) {
+      filteredMovies = userSavedMoviesCopy
+    }
+    setUserSavedMovies(filteredMovies)
+  }, [checkBoxActive, userSavedMoviesCopy])
+
+  useEffect(() => {
+    localStorage.getItem('checkboxLocal')
+    let filteredMovies
+    if (checkBoxActive) {
       filteredMovies = allMovies.filter(movie => movie.duration <= 40)
-    } else if (checkBoxActive) {
+    } else if (!checkBoxActive) {
       filteredMovies = allMovies
     }
     setUserFoundMovies(filteredMovies)
   }, [checkBoxActive, allMovies])
 
+  useEffect(() => {
+    const searchResult = JSON.parse(localStorage.getItem("searchInput"));
+    setSearchInput(searchResult);
+
+  }, [searchInput])
+
   const searchMoviesHandler = (event) => {
     const search = event.target.value.toLowerCase();
-    setSearchInput(search);
+    localStorage.setItem("searchInput", JSON.stringify(search))
+    const searchResult = JSON.parse(localStorage.getItem("searchInput"));
+    setSearchInput(searchResult);
   };
 
   function handleSaveMovie(movie, setMovieId) {
@@ -153,6 +196,7 @@ function App() {
       .then((res) => {
         setMovieId(res._id);
         setUserSavedMovies((state) => state.map((c) => c._id === movie._id ? res.data : c));
+        setUserSavedMoviesCopy((state) => state.map((c) => c._id === movie._id ? res.data : c));
       })
       .catch((err) => {
         console.log(err);
@@ -163,6 +207,7 @@ function App() {
     mainApi.deleteMovie(movie)
       .then((res) => {
         setUserSavedMovies((state) => state.filter((c) => c._id !== res._id))
+        setUserSavedMoviesCopy((state) => state.filter((c) => c._id !== res._id))
         handleSavedMoviesSearch()
       })
       .catch(err => {
@@ -171,12 +216,11 @@ function App() {
   }
 
   function handleLogout() {
-    localStorage.removeItem('token')
     setLoggedIn(false);
+    localStorage.clear()
     history.push("/");
   }
 
-  console.log(loggedIn)
   return (
     <div className="content">
       <CurrentUserContext.Provider value={currentUser}>
@@ -190,12 +234,16 @@ function App() {
           <ProtectedRoute
             exact path='/movies' loggedIn={loggedIn}
             component={Movies}
+            isLoading={isLoading}
+            getMovies={getMovies}
             searchedMovies={searchedMovies}
             userSavedMovies={userSavedMovies}
             handleSaveMovie={handleSaveMovie}
             handleMovieDelete={handleMovieDelete}
             searchMoviesHandler={searchMoviesHandler}
             handleCheckbox={handleCheckbox}
+            checkBoxActive={checkBoxActive}
+            searchInput={searchInput}
           />
           <ProtectedRoute exact path='/saved-movies'
             loggedIn={loggedIn}
@@ -207,6 +255,8 @@ function App() {
             handleSavedMoviesSearch={handleSavedMoviesSearch}
             searchMoviesHandler={searchMoviesHandler}
             handleCheckbox={handleCheckbox}
+            checkBoxActive={checkBoxActive}
+            searchInput={searchInput}
           />
           <ProtectedRoute exact path='/profile'
             component={Profile}
