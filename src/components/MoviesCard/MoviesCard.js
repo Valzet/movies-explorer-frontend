@@ -28,6 +28,7 @@ function Card(props) {
     setSavedCard(!isSaved);
   }
 
+  const cardRemoveButtonClassName = `${'item__remove'}`
   const cardLikeButtonClassName = `${isSaved ? 'item__liked' : 'item__addLike'}`;
   const path = useLocation();
 
@@ -38,10 +39,10 @@ function Card(props) {
           src={path.pathname === '/movies' ? `https://api.nomoreparties.co${props.movies.image.url}` : `${props.movies.image}`}
           alt={props.movies.nameRU} />
       </a>
-      <button type="button" aria-label="Лайк" className={cardLikeButtonClassName} onClick={handleLikeClick}></button>
+      <button type="button" aria-label="Лайк" className={path.pathname === '/movies' ? cardLikeButtonClassName : cardRemoveButtonClassName} onClick={handleLikeClick}></button>
       <div className="item__about">
         <h2 className="item__title">{props.movies.nameRU}</h2>
-        <p className="item__duration">{props.movies.duration}</p>
+        <p className="item__duration">{props.movies.duration > 60 ? `${parseInt(props.movies.duration / 60)}ч ${props.movies.duration % 60}м` : `${props.movies.duration}м`}</p>
       </div>
     </li>
   )

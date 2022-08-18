@@ -24,7 +24,6 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-
 }
 
 .footer__copyright {
@@ -76,7 +75,6 @@
     justify-content: center;
     align-items: center;
   }
-
 
   .footer__text {
     font-size: 12px;

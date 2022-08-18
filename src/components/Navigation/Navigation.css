@@ -43,7 +43,6 @@
     flex-direction: row;
     align-items: center;
     justify-content: center;
-
 }
 
 .profile__img {
@@ -110,7 +109,6 @@
     text-decoration: none;
     color: black;
 }
-
 
 .navigation__movies-links {
     margin-left: 44px;

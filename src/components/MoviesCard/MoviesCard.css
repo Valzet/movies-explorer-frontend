@@ -6,7 +6,6 @@
   position: relative;
   display: flex;
   flex-direction: column;
-
 }
 
 .item__about {
@@ -15,7 +14,6 @@
   justify-content: space-between;
   align-items: center;
   overflow: hidden;
-
 }
 
 .item__title {
@@ -64,6 +62,21 @@
   right: 14px;
   top: 14px;
   background-image: url(../../images/liked.svg);
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.item__remove {
+  position: absolute;
+  width: 21px;
+  height: 21px;
+  right: 14px;
+  top: 14px;
+  background-image: url(../../images/removeImg.svg);
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
@@ -132,7 +145,5 @@
   .item__title {
     font-size: 12px;
     line-height: 15px;
-
   }
-
 }

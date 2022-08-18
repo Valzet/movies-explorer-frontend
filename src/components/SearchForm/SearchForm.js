@@ -3,7 +3,6 @@ import searchIcon from '../../images/search.svg'
 import searchButton from '../../images/SearchButton.svg'
 import FilterCheckbox from "../FilterCheckbox/FilterCheckbox"
 
-
 function SearchForm({ searchMoviesHandler, handleCheckbox, getMovies, checkBoxActive, searchInput }) {
     /* убрать кнопку. Заменить submit на onchange */
 

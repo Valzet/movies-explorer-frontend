@@ -46,14 +46,12 @@
     .elements__list {
         grid-template-columns: repeat(auto-fit, 330px);
         grid-gap: 46px 32px;
-
     }
 }
 
 @media screen and (max-width: 580px) {
     .elements {
         padding: 37px 0 0;
-
     }
 
     .elements__list {

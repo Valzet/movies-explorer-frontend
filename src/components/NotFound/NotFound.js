@@ -11,8 +11,6 @@ function NotFound() {
         <p className='notFound__subtitle'>Страница не найдена</p>
         <button onClick={goBack} className='notFound__button'>Назад</button>
     </section>)
-
-
 }
 
 export default NotFound;

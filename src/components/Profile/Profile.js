@@ -53,7 +53,7 @@ function Profile(props) {
       name, email
     );
     pushSuccessMsg()
-    
+
     const timer = setTimeout(() => {
       history.goBack()
       setIsDisabled(true)
@@ -101,8 +101,8 @@ function Profile(props) {
             nameValid === false ||
             emailValid === false ||
             (name === currentUser.name && email === currentUser.email)
-          }>Сохранить</button> 
-          <button onClick={cancelEdit} className='form__button form__buttons_type_logout'>Отмена</button>
+          }>Сохранить</button>
+            <button onClick={cancelEdit} className='form__button form__buttons_type_logout'>Отмена</button>
           </>}
 
       </form>

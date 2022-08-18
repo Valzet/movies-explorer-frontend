@@ -23,8 +23,9 @@ function App() {
   const [searchInput, setSearchInput] = useState('');
   const [currentUser, setCurrentUser] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [isWaitingForRes, setIsWaitingForRes] = useState(false);
+  const [isErrorAuth, setIsErrorAuth] = useState(false);
   const history = useHistory();
-  // const [foundError, setFoundError] = useState('');
 
   const showSavedMovies = userSavedMovies.filter((movie) => {
     if (searchInput !== "") {
@@ -101,6 +102,7 @@ function App() {
   }
 
   const handleLogin = (email, password) => {
+    setIsWaitingForRes(true)
     mainApi.authorize(email, password)
       .then((res) => {
         localStorage.setItem('token', res.token);
@@ -108,17 +110,28 @@ function App() {
         history.push("/movies");
       })
       .catch(err => {
+        setIsErrorAuth(true)
         console.log(err);
+      })
+      .finally(() => {
+        setIsWaitingForRes(false)
+        setIsErrorAuth(false)
       })
   }
 
   const handleRegister = (name, email, password) => {
+    setIsWaitingForRes(true)
     mainApi.register(name, email, password)
       .then(() => {
         handleLogin(email, password)
       })
       .catch(err => {
+        setIsErrorAuth(true)
         console.log(err);
+      })
+      .finally(() => {
+        setIsWaitingForRes(false)
+        setIsErrorAuth(false)
       })
   }
 
@@ -162,8 +175,6 @@ function App() {
     let filteredMovies
     if (checkBoxActive) {
       filteredMovies = userSavedMoviesCopy.filter(movie => movie.duration <= 40)
-      // let moviesNotFound = filteredMovies.filter(movie => movie === 0)
-      // setFoundError(moviesNotFound)
     } else if (!checkBoxActive) {
       filteredMovies = userSavedMoviesCopy
     }
@@ -228,8 +239,12 @@ function App() {
     <div className="content">
       <CurrentUserContext.Provider value={currentUser}>
         <Switch>
-          <Route exact path='/signup'> <Register handleRegister={handleRegister} />  </Route>
-          <Route exact path='/signin'> <Login handleLogin={handleLogin} tokenCheck={tokenCheck} /> </Route>
+          <Route exact path='/signup'> <Register handleRegister={handleRegister} isWaitingForRes={isWaitingForRes}
+            isErrorAuth={isErrorAuth} setIsErrorAuth={setIsErrorAuth} />
+          </Route>
+          <Route exact path='/signin'> <Login handleLogin={handleLogin} tokenCheck={tokenCheck}
+            isWaitingForRes={isWaitingForRes} isErrorAuth={isErrorAuth} setIsErrorAuth={setIsErrorAuth} />
+          </Route>
           <Route exact path='/'>
             <Header loggedIn={loggedIn} />
             <Main />

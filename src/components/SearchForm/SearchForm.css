@@ -16,7 +16,6 @@
     max-width: 1140px;
     width: 100%;
     margin: 0 auto;
-
 }
 
 .searchForm__decoration {
@@ -63,7 +62,6 @@
     margin-right: 30px;
     position: relative;
     top: 16px;
-
 }
 
 .switch__toogle {
@@ -84,9 +82,7 @@
     }
 
     .searchForm__button {
-
         right: 15px;
-
     }
 
     .switch {
@@ -103,7 +99,6 @@
     }
 
     .searchForm__input {
-
         width: 30%;
     }
 
@@ -114,7 +109,6 @@
 
     .searchForm {
         padding: 70px 10px 113px;
-
     }
 
     .searchForm__decoration {
@@ -124,7 +118,6 @@
     .searchForm__button {
         top: 20px;
         right: 11px;
-
     }
 
     .searchForm__input {
@@ -133,12 +126,10 @@
         padding-left: 19px;
         padding-top: 5px;
     }
-
 }
 
 @media screen and (max-width: 480px) {
     .switch {
-
         top: 28%;
         left: 30%;
     }
@@ -146,7 +137,6 @@
 
 @media screen and (max-width: 380px) {
     .switch {
-
         top: 28%;
         left: 27%;
     }

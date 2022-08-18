@@ -1,4 +1,3 @@
-import "./SavedMovies.css"
 import MoviesCardList from "../MoviesCardList/MoviesCardList"
 import Footer from '../Footer/Footer'
 import { useEffect } from "react";

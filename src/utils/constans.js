@@ -1,4 +1,3 @@
-
 export const initialMovies = [
   {
     movieId: 1,

@@ -36,7 +36,6 @@
     position: fixed;
     top: 0;
     right: 0;
-
 }
 
 .burger__buttonClose {
@@ -60,7 +59,6 @@
     flex-direction: column;
     justify-content: space-between;
     height: 100vh;
-    /* padding: 159px 0 92px; */
 }
 
 .burger__links {
@@ -79,7 +77,6 @@
     text-decoration: none;
     margin-bottom: 28px;
     padding-bottom: 1px;
-
 }
 
 .burger__link-underline {
@@ -107,7 +104,5 @@
 
     .burger__container {
         width: 100vw;
-    
     }
- }
-
+}

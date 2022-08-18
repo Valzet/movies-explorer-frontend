@@ -9,7 +9,6 @@ function MoviesCardList({ searchedMovies, userSavedMovies, handleSaveMovie, hand
   const [cardsCount, setCardsCount] = useState(12); //отображаемые карточки
   const [movieList, setMovieList] = useState([]); //список загруженных фильмов
   const [foundError, setFoundError] = useState('');
-
   const isDesktop = useMediaQuery('(min-width: 769px)');
   const isTablet = useMediaQuery('(max-width: 768px)');
   const isMobile = useMediaQuery('(max-width: 480px)');
@@ -24,14 +23,20 @@ function MoviesCardList({ searchedMovies, userSavedMovies, handleSaveMovie, hand
     }
   }
 
-  useEffect(() => { //хук ресайза 
-    const timer = setTimeout(() => {
-      window.addEventListener('resize', mediaQueryHooks);
-    }, 100);
-    return () => clearTimeout(timer);
+  useEffect(() => {
+    onResize();
+    return () => offResize();
   })
 
-  useEffect(() => { //хук количества отображаемых карточек
+  function onResize() {
+    window.addEventListener('resize', mediaQueryHooks);
+  }
+
+  function offResize() {
+    window.removeEventListener('resize', mediaQueryHooks)
+  }
+
+  useEffect(() => {
     setMovieList(searchedMovies.slice(0, cardsCount));
     setFoundError('')
     if (searchedMovies.length === 0) {
@@ -41,17 +46,13 @@ function MoviesCardList({ searchedMovies, userSavedMovies, handleSaveMovie, hand
           setFoundError('Упс, ничего не найдено..')
         } else if (movieList.length > 0) {
           setFoundError('')
-        } 
+        }
       }
     }
     if (!localStorage.getItem('allMovies')) {
       setFoundError('')
     }
-
-
   }, [cardsCount, searchedMovies, setMovieList, movieList.length])
-
-
 
   function handleAddMoreCards() { //дополнительные карточки
     if (isDesktop && !isMobile && !isTablet) {

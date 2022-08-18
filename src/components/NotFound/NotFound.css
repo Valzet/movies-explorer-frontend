@@ -11,7 +11,6 @@
     line-height: 169px;
     text-align: center;
     margin: 20% 0 0;
-
 }
 
 .notFound__subtitle {
@@ -20,7 +19,6 @@
     line-height: 19px;
     text-align: center;
     margin: 5px 0 15%;
-
 }
 
 .notFound__button {
@@ -33,34 +31,31 @@
     text-decoration: none;
     background-color: white;
     cursor: pointer;
-
 }
 
-@media screen and (max-width: 769px) { 
+@media screen and (max-width: 769px) {
     .notFound__subtitle {
         margin: 5px 0 25%;
-    
     }
 }
 
-@media screen and (max-width: 540px) { 
-    
-.notFound__title {
-    font-size: 80px;
-    line-height: 97px;
-    margin: 110% 0 0;
-}
+@media screen and (max-width: 540px) {
 
-.notFound__subtitle {
-font-size: 12px;
-line-height: 15px;
-    margin: 15px 0 15%;
-}
+    .notFound__title {
+        font-size: 80px;
+        line-height: 97px;
+        margin: 110% 0 0;
+    }
 
-.notFound__button {
-font-size: 12px;
-line-height: 15px;
-margin-top: 75%;
+    .notFound__subtitle {
+        font-size: 12px;
+        line-height: 15px;
+        margin: 15px 0 15%;
+    }
 
-}
+    .notFound__button {
+        font-size: 12px;
+        line-height: 15px;
+        margin-top: 75%;
+    }
 }

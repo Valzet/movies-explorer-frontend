@@ -7,12 +7,10 @@ function BurgerMenu() {
 
     function handleOpenBurger() {
         setBurgerOpen(true)
-        console.log(`open`)
     }
 
     function handleCloseBurger() {
         setBurgerOpen(false)
-        console.log(`close`)
     }
 
     return (<>
