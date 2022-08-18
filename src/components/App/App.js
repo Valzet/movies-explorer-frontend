@@ -24,6 +24,7 @@ function App() {
   const [currentUser, setCurrentUser] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const history = useHistory();
+  // const [foundError, setFoundError] = useState('');
 
   const showSavedMovies = userSavedMovies.filter((movie) => {
     if (searchInput !== "") {
@@ -161,6 +162,8 @@ function App() {
     let filteredMovies
     if (checkBoxActive) {
       filteredMovies = userSavedMoviesCopy.filter(movie => movie.duration <= 40)
+      // let moviesNotFound = filteredMovies.filter(movie => movie === 0)
+      // setFoundError(moviesNotFound)
     } else if (!checkBoxActive) {
       filteredMovies = userSavedMoviesCopy
     }

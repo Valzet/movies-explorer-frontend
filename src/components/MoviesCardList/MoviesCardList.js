@@ -33,14 +33,21 @@ function MoviesCardList({ searchedMovies, userSavedMovies, handleSaveMovie, hand
 
   useEffect(() => { //хук количества отображаемых карточек
     setMovieList(searchedMovies.slice(0, cardsCount));
-    checkMovies()
-    function checkMovies() {
-      if (movieList.length === 0) {
-        console.log('1')
-        setFoundError('Ничего не найдено')
+    setFoundError('')
+    if (searchedMovies.length === 0) {
+      checkMovies()
+      function checkMovies() {
+        if (movieList.length === 0) {
+          setFoundError('Упс, ничего не найдено..')
+        } else if (movieList.length > 0) {
+          setFoundError('')
+        } 
       }
-      else if (movieList.length > 0) { setFoundError('') }
     }
+    if (!localStorage.getItem('allMovies')) {
+      setFoundError('')
+    }
+
 
   }, [cardsCount, searchedMovies, setMovieList, movieList.length])
 
