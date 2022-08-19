@@ -1,5 +1,5 @@
 import "./AboutMe.css"
-import student from '../../images/student.svg'
+import student from '../../images/moe-photo.jpg'
 
 function AboutMe() {
     return (
@@ -8,14 +8,14 @@ function AboutMe() {
                 <h2 className="aboutMe__title">Студент</h2>
                 <div className="aboutMe__content">
                     <article className="aboutMe__student">
-                        <h2 className="aboutMe__name">Виталий</h2>
-                        <p className="aboutMe__profession">Фронтенд-разработчик, 30 лет</p>
-                        <p className="aboutMe__description">Я родился и живу в Саратове, закончил факультет экономики СГУ. У меня есть жена
-                            и дочь. Я люблю слушать музыку, а ещё увлекаюсь бегом. Недавно начал кодить. С 2015 года работал в компании «СКБ Контур».
-                            После того, как прошёл курс по веб-разработке, начал заниматься фриланс-заказами и ушёл с постоянной работы.</p>
+                        <h2 className="aboutMe__name">Влад</h2>
+                        <p className="aboutMe__profession">Фронтенд-разработчик, 29 лет</p>
+                        <p className="aboutMe__description">Я родился на о.Сахалин, но живу в Санкт-Петербурге, закончил факультет Рекламы и связи с общественностью СПБУУЭ.
+                            Люблю историю и мотоциклы.
+                            Кодить впервые начал в рамках работы интернет-маркетолога, но решил идти дальше и вообще менять профессию, так как программирование меня увлекло</p>
                         <div className="aboutMe__contacts">
-                            <a className="aboutMe__link" href="fafa.com">Facebook</a>
-                            <a className="aboutMe__link" href="fafa.com">Github</a>
+                            <a className="aboutMe__link" href="https://vk.com/vote2024" target="_blank" rel="noreferrer">VKontakte</a>
+                            <a className="aboutMe__link" href="https://github.com/Valzet/" target="_blank" rel="noreferrer">Github</a>
                         </div>
                     </article>
                     <img className="aboutMe__photo" src={student} alt='студент' />
