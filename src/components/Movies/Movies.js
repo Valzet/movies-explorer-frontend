@@ -1,16 +1,15 @@
 import MoviesCardList from "../MoviesCardList/MoviesCardList"
-import SearchForm from "../SearchForm/SearchForm"
-import { initialMovies } from '../../utils/constans.js'
-import Header from '../Header/Header'
 import Footer from '../Footer/Footer'
+import SearchForm from "../SearchForm/SearchForm"
+import Header from "../Header/Header"
 
-function Movies() {
+function Movies({ searchedMovies, userSavedMovies, handleSaveMovie, handleMovieDelete, searchMoviesHandler, handleCheckbox, loggedIn, getMovies, isLoading, checkBoxActive, searchInput }) {
     return (
         <>
-        <Header /> 
-        <SearchForm />
-        <MoviesCardList initialMovies={initialMovies} />
-        <Footer />
+            <Header loggedIn={loggedIn} />
+            <SearchForm searchMoviesHandler={searchMoviesHandler} handleCheckbox={handleCheckbox} getMovies={getMovies} checkBoxActive={checkBoxActive} searchInput={searchInput}></SearchForm>
+            <MoviesCardList searchedMovies={searchedMovies} userSavedMovies={userSavedMovies} handleSaveMovie={handleSaveMovie} handleMovieDelete={handleMovieDelete} isLoading={isLoading} />
+            <Footer />
         </>
     )
 }

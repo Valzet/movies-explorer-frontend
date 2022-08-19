@@ -14,7 +14,6 @@
   height: 0;
 }
 
-/* The slider */
 .slider {
   position: absolute;
   cursor: pointer;
@@ -50,7 +49,6 @@
 .checkbox:checked+.slider:before {
   transform: translateX(16px);
 }
-
 
 .switch__text {
   position: relative;

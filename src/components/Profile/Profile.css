@@ -26,7 +26,6 @@
     justify-content: space-between;
     border-bottom: 1px solid #E8E8E8;
     padding-bottom: 16px;
-    margin-bottom: 17px;
     width: 410px;
 }
 
@@ -52,6 +51,7 @@
     border: none;
     outline: none;
     margin: 0;
+    background: transparent;
 }
 
 .form__buttons {
@@ -80,10 +80,49 @@
     color: #EE3465;
 }
 
+.form__save-button {
+    border: none;
+    font-size: 14px;
+    line-height: 16px;
+    text-align: center;
+    cursor: pointer;
+    font-weight: 500;
+    margin-bottom: 16px;
+    background-color: #FF6838;
+    width: 100%;
+    color: white;
+    height: 45px;
+    cursor: pointer;
+}
+
+.form__save-button:disabled {
+    background-color: #4d4d4d;
+    cursor: none;
+}
+
+.profile__error-message {
+    display: block;
+    font-size: 11px;
+    font-weight: 400;
+    line-height: 13px;
+    text-align: left;
+    color: red;
+    background-color: transparent;
+    height: 24px;
+    padding-bottom: 6px;
+}
+
+.form__message {
+    font-size: 15px;
+    font-weight: 500;
+    line-height: 13px;
+    color: green;
+    padding-bottom: 7px;
+}
+
 @media screen and (max-width: 769px) {
     .profile__form {
         padding-top: 30%;
-
     }
 
     .profile__inputs {
@@ -92,30 +131,28 @@
 }
 
 @media screen and (max-width: 480px) {
-
     .profile__inputs {
         margin: 0 30px;
     }
-    
+
     .profile__form {
         padding-top: 66px;
         max-width: 320px;
         margin: 0 auto;
     }
+
     .profile__inputs {
         padding: 81px 0 117%;
     }
-    .profile__input-area {
 
+    .profile__input-area {
         padding-bottom: 16px;
         margin-bottom: 17px;
         max-width: 260px;
     }
 
     .form__button {
-
         font-size: 12px;
         line-height: 14px;
-
     }
- }
+}

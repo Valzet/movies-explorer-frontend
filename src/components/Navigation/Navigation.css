@@ -8,6 +8,11 @@
     align-items: center;
 }
 
+.navigation__color {
+    color: white;
+    background-color: transparent;
+}
+
 .navigation__movies {
     font-size: 13px;
     font-weight: 500;
@@ -38,7 +43,6 @@
     flex-direction: row;
     align-items: center;
     justify-content: center;
-
 }
 
 .profile__img {
@@ -58,6 +62,16 @@
     width: 26px;
     height: 30px;
     background-color: #F9F9F9;
+    margin-left: 17px;
+}
+
+.profile__span_type_main {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 26px;
+    height: 30px;
+    background-color: transparent;
     margin-left: 17px;
 }
 
@@ -95,7 +109,6 @@
     text-decoration: none;
     color: black;
 }
-
 
 .navigation__movies-links {
     margin-left: 44px;
