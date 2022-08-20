@@ -31,10 +31,12 @@
     color: #A0A0A0;
     height: 70px;
     width: calc(100% - 450px);
+    box-sizing: border-box;
+    outline: none;
 }
 
-.searchForm__input:focus {
-    outline: 1px solid #666;
+.searchForm__input:hover {
+    border-bottom: 2px solid #FF6838;
 }
 
 .searchForm__button {

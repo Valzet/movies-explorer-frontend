@@ -24,8 +24,34 @@ function Navigation({ loggedIn }) {
             </nav>)
         } else {
             return (<nav className="navigation__rightSide">
-                {isDesktop ? <Link className='profile' to='profile'>Аккаунт<div className={changeLocationTextColor()}><div className="profile__img"></div></div></Link> : <BurgerMenu />}
+                {isDesktop ? <Link className='profile' to='profile'><p className={handleProfileLink()}>Аккаунт</p><div className={changeLocationTextColor()}><div className="profile__img"></div></div></Link> : <BurgerMenu />}
             </nav>)
+        }
+    }
+
+    function handleProfileLink() {
+        switch (path.pathname) {
+            case '/profile':
+                return ('profile profile_type_active');
+            default:
+                return ('profile');
+        }
+    }
+
+    function handleMovieLink() {
+        switch (path.pathname) {
+            case '/movies':
+                return ('navigation__movies navigation__movies_type_active');
+            default:
+                return ('navigation__movies');
+        }
+    }
+    function handleSavedMovieLink() {
+        switch (path.pathname) {
+                case '/saved-movies':
+                return ('navigation__movies navigation__movies_type_active');
+            default:
+                return ('navigation__movies');
         }
     }
 
@@ -34,8 +60,8 @@ function Navigation({ loggedIn }) {
             return;
         } else {
             return (<div className={isDesktop ? "navigation__movies-links" : "navigation__mobile"}>
-                <Link className='navigation__movies' to='movies'>Фильмы</Link>
-                <Link className='navigation__saved-movies' to='saved-movies'>Сохраненные фильмы</Link>
+                <Link className={handleMovieLink()} to='movies'>Фильмы</Link>
+                <Link className={handleSavedMovieLink()} to='saved-movies'>Сохраненные фильмы</Link>
             </div>);
         }
     }
